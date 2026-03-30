@@ -15,3 +15,23 @@ export const validateUser=[
     .isIn(["candidate", "recruiter", "admin"])
     .withMessage("Invalid role")
 ] 
+
+export const validateJobs=[
+  body("title").notEmpty().withMessage("Title was required"),
+ 
+  body("description")
+  .isLength({min:30}).withMessage("description must be long "),
+
+   body("jobType")
+    .isIn(["full-time", "part-time", "remote" ,"internship"])
+    .withMessage("Invalid job type"),
+
+  body("salary")
+  .notEmpty(),
+
+  body("experience").notEmpty(),
+
+  body("isOpen")
+    .optional() // kyunki default hai
+    .isBoolean().withMessage("isOpen must be true or false") .toBoolean()
+]

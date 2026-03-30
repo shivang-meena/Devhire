@@ -4,8 +4,9 @@ const app=express();
 import mongoose from "mongoose"
 
 import route from "./routes/authRoutes.js"
-
-
+import jobRoute from "./routes/jobRouter.js"
+import Applicationroute from "./routes/applicationRoutes.js"
+import adminRoutes from "./routes/adminRoutes.js"
 app.use(express.json())
 
 main().then(()=>{
@@ -19,10 +20,13 @@ async function main() {
 
 app.use("/user",route);
 
+app.use("/jobs",jobRoute);
+ 
+app.use("/applications",Applicationroute);
 
-app.get("/",(req,res)=>{
-    res.send("yes i am wokring ");
-});
+app.use("/admin",adminRoutes);
+
+
 
 
 

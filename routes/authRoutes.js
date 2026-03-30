@@ -8,4 +8,6 @@ route.post("/signup",validateUser,registration);
 
 route.post("/login",login);
 
+
+
 export default route;

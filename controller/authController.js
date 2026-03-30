@@ -5,8 +5,6 @@ if (process.env.NODE_ENV != "production") {
 
 
 import { User } from "../models/user.js"
-import { Job } from "../models/job.js"
-import { Application } from "../models/applications.js"
 import { validationResult } from "express-validator"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
