@@ -3,7 +3,7 @@ if (process.env.NODE_ENV != "production") {
     dotenv.config()
 }
 
-
+import crypto from "crypto"
 import { User } from "../models/user.js"
 import { validationResult } from "express-validator"
 import bcrypt from "bcryptjs"
@@ -57,6 +57,20 @@ export const login = async (req, res) => {
 
     } catch (err) {
         console.log(err)
+        res.status(400).json({ message: "no it was not workig fine " });
+    }
+}
+
+
+
+
+//forgot password
+export const forgotpass=async (req,res)=>{
+      try {
+
+        const {from,to,text}=req.body;
+                 
+      } catch (err) {
         res.status(400).json({ message: "no it was not workig fine " });
     }
 }

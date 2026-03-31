@@ -16,11 +16,17 @@ let userSchema=new Schema({
         type:String,
         enum:["candidate","admin","recruiter"]
      },
-     profilepicture:String,
+     profilepicture:{
+      url:String,
+      name:String
+     },
 
 
      //this is candidate only fields
-     resume:String,
+     resume:{
+      url:String,
+      name:String
+     },
      skills:[String],
      experience:String,
      education:String,
@@ -30,6 +36,10 @@ let userSchema=new Schema({
      companyName:String,
      companylogo:String,
      companyDescription:String,
+
+     //this is for mail toke 
+     resetToken: String,
+     resetTokenExpiry: Date,
 
      isBlocked: { type: Boolean, default: false }//this is for admin if admin want to block any candidatre or user
      
@@ -44,7 +54,12 @@ userSchema.pre("save",async function() {
 
 });
 
-
+userSchema.pre("findOneAndUpdate", async function(next) {
+  if (this._update.password) {
+    this._update.password = await bcrypt.hash(this._update.password, 10);
+  }
+ 
+});
 
 
 
