@@ -1,9 +1,15 @@
 import trasporter from "./mailconfig.js"
+import nodemailer from "nodemailer";
+
+
 
 export const sendmail= async (to,sub,text)=>{
+
     try {
+       
+        console.log(to+""+sub+" "+text);
           const info = await trasporter.sendMail({
-      from: "test@mail.com",
+          from: `leonor55@ethereal.email`, 
       to: to,
       subject: sub,
       text: text,
@@ -11,6 +17,7 @@ export const sendmail= async (to,sub,text)=>{
 
     console.log("Message sent:", info.messageId);
     } catch (err) {
-             res.status(400).json({messege:err+" gkjjjknk"});
+    console.log("Messagewas not  sent:", err);
+             
         }
 }

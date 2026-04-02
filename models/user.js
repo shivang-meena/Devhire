@@ -38,8 +38,14 @@ let userSchema=new Schema({
      companyDescription:String,
 
      //this is for mail toke 
-     resetToken: String,
-     resetTokenExpiry: Date,
+     resetToken: {
+      type:String,
+      default:null
+     },
+     resetTokenExpiry: {
+      type:Date,
+      default:null
+     },
 
      isBlocked: { type: Boolean, default: false }//this is for admin if admin want to block any candidatre or user
      
