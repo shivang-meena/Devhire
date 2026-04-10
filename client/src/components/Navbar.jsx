@@ -5,7 +5,7 @@ import { X, Menu } from "lucide-react"//this is lucide react librrary icon cross
 const PublicNavbar = ({user}) => {
     let [mobilenav, setmobilenav] = useState(false);
     return <>
-        <div className="flex w-full bg-white h-16 text-black justify-center items-center">
+        <div className="flex fixed top-0 left-0   w-full  h-16 text-black justify-center items-center bg-white/30 backdrop-blur-md">
             <div className="inner-div flex  w-full justify-between">
                 <div className="web-logo-text flex justify-center items-center pl-8 gap-2 text-xl font-bold">
                     <div className="web-logo bg-black w-10 h-10 rounded-lg  flex-center ">

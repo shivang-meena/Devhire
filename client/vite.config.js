@@ -5,4 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+   optimizeDeps: {
+    include: ['react-icons/bi', 'react-icons/fa6', 'react-icons/fi'] // jo bhi use kar raha hai
+  }
 })

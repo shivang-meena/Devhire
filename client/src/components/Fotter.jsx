@@ -1,7 +1,7 @@
 import logo from '../assets/f700fabe-7937-4a0b-a1fa-1480778bbe02.jpg';
 
 const Fotter = () => {
-    return <div className="outer-div-fotter px-10  pt-15">
+    return <div className="outer-div-fotter px-10  pt-10 bg-white">
         <div className="upper-fotter grid gap-8 sm:grid-cols-2 pb-10 lg:grid-cols-5 text-md ">
             <div className="flex flex-col gap-5">
                 <div className="web-logo-text flex  items-center gap-2 text-xl font-bold">
