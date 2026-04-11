@@ -10,7 +10,7 @@ const Login = () => {
                     Sign in to your DevHire account
                 </div>
             </div>
-            <form action="" novalidate className="needs-validation w-full flex flex-col gap-3">
+            <form action="" noValidate className="needs-validation w-full flex flex-col gap-3">
                <div className="emaillabelinput flex flex-col ">
                  <label htmlFor="" className="form-label">
                     Enter Your Email
@@ -22,7 +22,7 @@ const Login = () => {
                   <label htmlFor="" className="form-label">Enter Password</label>
                 <input type="password" className="form-control" placeholder="Enter Password" />
               </div>
-                <button class="btn btn-dark">Login</button>
+                <button className="btn btn-dark">Login</button>
             </form>
 
            <div className="signup-forgotpass flex flex-col text-center gap-3">

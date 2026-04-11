@@ -10,7 +10,7 @@ const CandidateRegistration=()=>{
                    Join thousands of developers finding their dream jobs
                 </div>
             </div>
-            <form action="" novalidate className="needs-validation w-full flex flex-col gap-3">
+            <form action="" noValidate className="needs-validation w-full flex flex-col gap-3">
                <div className="emaillabelinput flex flex-col ">
                  <label htmlFor="" className="form-label">
                     Full Name
@@ -54,7 +54,7 @@ const CandidateRegistration=()=>{
                 </label>
                 <textarea type="text" rows={5} className="form-control" placeholder="Education..." />
                </div>
-                <button class="btn btn-dark">Create Account</button>
+                <button className="btn btn-dark">Create Account</button>
             </form>
 
            

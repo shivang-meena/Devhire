@@ -3,9 +3,10 @@ import logo from '../assets/f700fabe-7937-4a0b-a1fa-1480778bbe02.jpg';
 import { X, Menu } from "lucide-react"//this is lucide react librrary icon cross and threelines icon for ham nav 
 
 const PublicNavbar = ({user}) => {
+    {user="sdnfkasndfm"}
     let [mobilenav, setmobilenav] = useState(false);
     return <>
-        <div className="flex fixed top-0 left-0   w-full  h-16 text-black justify-center items-center bg-white/30 backdrop-blur-md">
+        <div className=" transition-all flex fixed top-0 left-0   w-full  h-16 text-black justify-center items-center bg-white/30 backdrop-blur-md">
             <div className="inner-div flex  w-full justify-between">
                 <div className="web-logo-text flex justify-center items-center pl-8 gap-2 text-xl font-bold">
                     <div className="web-logo bg-black w-10 h-10 rounded-lg  flex-center ">
@@ -18,7 +19,7 @@ const PublicNavbar = ({user}) => {
 
 
                 {/* desktop navigation */}
-                <div className=" hidden login-signup  md:flex-center md:flex pr-8 gap-6 ">
+                <div className="transition-all hidden login-signup  md:flex-center md:flex pr-8 gap-6 ">
                     <div className="login flex-center">
                         Home
                     </div>
@@ -28,7 +29,6 @@ const PublicNavbar = ({user}) => {
                   
 
                  
-
             {user?(<div className="userprofile-name bg-gray-50 flex-center border border-gray-400 rounded-xl w-auto px-4 h-10 gap-2">
                     <div className="profilepic flex-center">
                         <img src={logo} className="h-6 w-6 border border-gray-200 rounded-xl" alt="" />
@@ -42,7 +42,7 @@ const PublicNavbar = ({user}) => {
                             <a href="http://localhost:5173/login?" className="!no-underline text-black">Log in</a>
                         </div>
                         <div className="signup bg-black w-23 h-9 font-semibold text-white rounded-lg flex-center">
-                            Register
+                             <a href="http://localhost:5173/choose-role" className="!no-underline text-white">Register</a>
                         </div>
 
                     </div>)}
@@ -53,7 +53,7 @@ const PublicNavbar = ({user}) => {
 
 
                 {/* //mobile navigation  */}
-                <div className=" flex  md:hidden pr-8 justify-center align-center ">
+                <div className=" transition-all flex  md:hidden pr-8 justify-center align-center ">
                     <button className="flex-center" onClick={() => setmobilenav(!mobilenav)}>
                         {mobilenav ? (<X className="h-5 w-5" />) : (<Menu className="h-5 w-5" />)}
                     </button>
@@ -67,8 +67,8 @@ const PublicNavbar = ({user}) => {
 
 
         </div>
-        {mobilenav && (<div className=" bg-white border border-gray-500    px-4 py-4  md:hidden">
-             <div className="w-full flex-center my-4 py-2 rounded-md border border-gray-500">
+        {mobilenav && (<div className="transition-all bg-white border mt-3 border-gray-500    px-4 py-4  md:hidden">
+             <div className="w-full bg-blue-700 flex-center my-4 py-2 rounded-md border border-gray-500">
                         Home
                     </div>
                     <div className="w-full flex-center my-4 py-2 rounded-md border border-gray-500">

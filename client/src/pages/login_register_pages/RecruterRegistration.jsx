@@ -10,7 +10,7 @@ return <div className="loginpage min-h-screen w-full flex-center pt-30 pb-30 px-
                    Create an account to start hiring top talent
                 </div>
             </div>
-            <form action="" novalidate className="needs-validation w-full flex flex-col gap-3">
+            <form action="" noValidate className="needs-validation w-full flex flex-col gap-3">
                <div className="emaillabelinput flex flex-col ">
                  <label htmlFor="" className="form-label">
                     Full Name
@@ -47,7 +47,7 @@ return <div className="loginpage min-h-screen w-full flex-center pt-30 pb-30 px-
                 <textarea type="text" rows={5} className="form-control" placeholder="Description..." />
                </div>
 
-                <button class="btn btn-dark">Create Account</button>
+                <button className="btn btn-dark">Create Account</button>
             </form>
 
            

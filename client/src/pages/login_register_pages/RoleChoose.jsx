@@ -30,7 +30,7 @@ const RoleChoose = () => {
                         <div>✓
                             Track your applications</div>
                     </div>
-                    <div className=" border rounded-md px-5 py-2 bg-[#0A345A] text-white"><button className="">Continue as Candidate</button></div>
+                    <div className=" border rounded-md px-5 py-2 bg-[#0A345A] text-white">  <a href="http://localhost:5173/candidate/register" className="!no-underline text-white"> <button className="">Continue as Candidate</button> </a> </div>
                 </div>
 
 
@@ -53,7 +53,7 @@ const RoleChoose = () => {
                         <div>✓
                             Track your applications</div>
                     </div>
-                    <div className=" border rounded-md px-5 py-2 bg-[#0A345A] text-white"><button className="">Continue as Candidate</button></div>
+                    <div className=" border rounded-md px-5 py-2 bg-[#0A345A] text-white"> <a href="http://localhost:5173/recruiter/register" className="!no-underline text-white"><button className="">Continue as Candidate</button></a></div>
 
                      
                 </div>

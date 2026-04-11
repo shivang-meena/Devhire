@@ -3,9 +3,13 @@ import LandingPage from "./pages/public/landingpage/Landing.jsx"
 import Navbar from "./components/Navbar.jsx"
 import Fotter from "./components/Fotter.jsx"
 import AppRoutes from "../routes/AppRoutes.jsx"
+import { useState } from "react"
 function App() {
-  return (
-    <> 
+   
+  return (<> 
+
+
+
     <AuthProvider>
       <Navbar></Navbar>
  {/* <LandingPage></LandingPage> */}
@@ -13,7 +17,7 @@ function App() {
  <AppRoutes></AppRoutes>
 
  </main>
-    <Fotter></Fotter>
+    <Fotter ></Fotter>
        </AuthProvider>
        </>
   )
