@@ -36,9 +36,10 @@ const PublicNavbar = ({user}) => {
                     <div className="profile-name flex-center">
                             {user}
                     </div>
-                 </div>):(<div className="flex-center gap-5 border border-gray-300 p-1 rounded-md w-43">
-                        <div className="login flex-center">
-                            Log in
+                 </div>):(<div className="flex-center gap-5 border border-gray-300 p-1 rounded-md w-45">
+                        <div className="login flex-center w-13 no-underline">
+                            
+                            <a href="http://localhost:5173/login?" className="!no-underline text-black">Log in</a>
                         </div>
                         <div className="signup bg-black w-23 h-9 font-semibold text-white rounded-lg flex-center">
                             Register
