@@ -12,7 +12,7 @@ import { useState } from "react";
 
 
 const Sidebar = ({sidebarspacefunc}) => {
-    let [full,setfull]=useState(true);
+    let [full,setfull]=useState(false);
 
     return<> 
     <div className={`transition-all duration-300 fixed top-15 left-0 flex flex-col bg-[#0A345A] text-white p-4 gap-4 h-screen ${!full?"w-16 items-center":"w-64"} `}>

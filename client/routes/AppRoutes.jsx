@@ -4,9 +4,10 @@ import Login from "../src/pages/login_register_pages/Login.jsx"
 import RecruiterRegistration from "../src/pages/login_register_pages/RecruterRegistration.jsx"
 import CandidateRegistration from "../src/pages/login_register_pages/CandidateRegistration.jsx"
 import RoleChoose from "../src/pages/login_register_pages/RoleChoose.jsx"
-import UserDashboard from "../src/pages/candidateDashboard/UserDashboard.jsx"
+import UserDashboard from  "../src/pages/candidate/candidateDashboard/UserDashboard.jsx"
+import JobBrowse from "../src/pages/candidate/Browsejob/JobBrowse.jsx"
 
-const AppRoutes=({sidebarspacecomechild})=>{
+const AppRoutes=()=>{
     return <Routes>
         <Route path="/" element={<LandingPage></LandingPage>}/>
         <Route path="/login" element={<Login></Login>}/>
@@ -14,6 +15,7 @@ const AppRoutes=({sidebarspacecomechild})=>{
         <Route path="/candidate/register"  element={<CandidateRegistration/>}/>
         <Route path="/choose-role"  element={<RoleChoose/>} />
         <Route path="/user-dashboard" element={<UserDashboard />}/>
+        <Route path="/user-browsejobs" element={<JobBrowse/>}/>
         <Route path="*" element={<div className="pt-30">Page Not Found lorem*30</div>} />
     </Routes>
 }

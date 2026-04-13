@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { SlCalender } from "react-icons/sl";
 import Sidebar from "./component/Sidebar";
+import { SlCalender } from "react-icons/sl";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { FaShoppingBag } from "react-icons/fa";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { CiLocationOn } from "react-icons/ci";
 import JobCard from "./component/JobCard";
-import "../../index.css"
+
 
 const UserDashboard = () => {
     let [marginleft, setmarginleft] = useState(false);
@@ -28,7 +28,7 @@ const UserDashboard = () => {
             <div className="three-cards  flex flex-col  my-6 gap-4 md:flex-row md:w-full justify-center ">
 
 
-                <div className="flex min-w-xs justify-between items-center border border shadow-sm rounded-xl h-40 px-4">
+                <div className="flex min-w-3xs justify-between items-center border border shadow-sm rounded-xl h-40 px-4 md:min-w-xs">
                     <div className="flex flex-col  ">
                         <div className="text-sm">Applications</div>
                         <div className="text-2xl font-bold">12</div>
@@ -36,7 +36,7 @@ const UserDashboard = () => {
                     <div className="text-3xl bg-[#DBEAFE] p-2 rounded-md"><IoMdCheckboxOutline /></div>
                 </div>
 
-                <div className="flex  min-w-xs justify-between items-center border border shadow-sm rounded-xl h-40 px-4">
+                <div className="flex  min-w-3xs justify-between items-center border border shadow-sm rounded-xl h-40 px-4 md:min-w-xs">
                     <div className="flex flex-col  ">
                         <div className="text-sm">Interviews</div>
                         <div className="text-2xl font-bold">3</div>
@@ -44,7 +44,7 @@ const UserDashboard = () => {
                     <div className="text-3xl bg-[#DBFCE7] p-2 rounded-md text-[#008236]"><FaShoppingBag /></div>
                 </div>
 
-                <div className="flex  min-w-xs justify-between items-center border border shadow-sm rounded-xl h-40 px-4">
+                <div className="flex  min-w-3xs justify-between items-center border border shadow-sm rounded-xl h-40 px-4 md:min-w-xs">
                     <div className="flex flex-col  ">
                         <div className="text-sm">Saved Jobs</div>
                         <div className="text-2xl font-bold">28</div>
