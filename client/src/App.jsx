@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar.jsx"
 import Fotter from "./components/Fotter.jsx"
 import AppRoutes from "../routes/AppRoutes.jsx"
 import { useState } from "react"
+import JobDetails from "./pages/candidate/Jobdetail/JobDetails.jsx"
 function App() {
    
   return (<> 
@@ -12,13 +13,16 @@ function App() {
 
     <AuthProvider>
       <Navbar></Navbar>
- {/* <LandingPage></LandingPage> */}
  <main>
  <AppRoutes></AppRoutes>
-
  </main>
     <Fotter ></Fotter>
        </AuthProvider>
+
+
+{/* this is for tempshow job detil  */}
+
+{/* <JobDetails></JobDetails> */}
        </>
   )
 }

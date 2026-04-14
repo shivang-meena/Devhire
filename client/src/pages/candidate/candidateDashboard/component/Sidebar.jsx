@@ -9,89 +9,120 @@ import { LuLogOut } from "react-icons/lu";
 import { FaAngleRight } from "react-icons/fa6";
 import { FaChevronLeft } from "react-icons/fa";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
-const Sidebar = ({sidebarspacefunc}) => {
+const Sidebar = ({sidebarspacefunc,colortext}) => {
     let [full,setfull]=useState(false);
-
+    let [color,setcolor]=useState(colortext);
     return<> 
     <div className={`transition-all duration-300 fixed top-15 left-0 flex flex-col bg-[#0A345A] text-white p-4 gap-4 h-screen ${!full?"w-16 items-center":"w-64"} `}>
         <div className={`options-sidebar flex flex-col  gap-3  `}>
 
 
-            <div className={`flex justify-start  gap-2 bg-[#0E5794] h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
+            <div className={`flex justify-start  gap-2 ${color==="Dashboard"&&"bg-[#0E5794]"} h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
-                    <RiDashboardLine />
+                   
+                     <Link to="/user-dashboard" className="text-white !no-underline"> <RiDashboardLine /> </Link>
+                    
                 </div>
                 {full&&<div className="text font-semibold text-md">
-                    Dashboard
+                   
+                     <Link to="/user-dashboard" className="text-white !no-underline">  Dashboard</Link>
+                    
                 </div>}
                 
             </div>
 
 
+            <div className={`flex justify-start  gap-2 ${color==="Browse Jobs"&&"bg-[#0E5794]"} h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
             <div className={`flex justify-start  gap-2  h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
-                    <FaShoppingBag />
+                    
+                     <Link to="/user-browsejobs" className="text-white !no-underline"><FaShoppingBag /></Link>
+                    
                 </div>
                {full&&<div className="text font-semibold text-md">
-                    Browse Jobs
+                   
+                     <Link to="/user-browsejobs" className="text-white !no-underline">Browse Jobs</Link>
+                    
                 </div>}
+            </div>
             </div>
 
 
-            <div className={`flex justify-start  gap-2 h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
+
+            <div className={`flex justify-start  gap-2 h-9 rounded-lg  ${color==="My Applications"&&"bg-[#0E5794]"} items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
-                    <IoMdCheckboxOutline />
+                   
+                     <Link to="/myapllications" className="text-white !no-underline"> <IoMdCheckboxOutline /></Link>
+
                 </div>
                 {full&&<div className="text font-semibold text-md">
-                    My Applications
+                     <Link to="/myapllications" className="text-white !no-underline">My Applications</Link>
                 </div>}
             </div>
 
 
-            <div   className={`flex justify-start  gap-2 h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
+            <div   className={`flex justify-start  gap-2 h-9 rounded-lg  ${color==="Saved Jobs"&&"bg-[#0E5794]"} items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
-                    <IoIosHeartEmpty />
+                   
+                     <Link to="/saved-jobs" className="text-white !no-underline"> <IoIosHeartEmpty /></Link>
+
                 </div>
               {full&&<div className="text font-semibold text-md">
-                    Saved Jobs
+                 
+                     <Link to="/saved-jobs" className="text-white !no-underline">Saved Jobs</Link>
+                    
                 </div>}
             </div>
 
 
-            <div className={`flex justify-start  gap-2 h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
+            <div className={`flex justify-start  gap-2 h-9 rounded-lg items-center  ${color==="My Profile"&&"bg-[#0E5794]"} ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
-                    <GoPerson />
+                 
+                     <Link to="/myapllications" className="text-white !no-underline">    <GoPerson /></Link>
+
                 </div>
               {full&&<div className="text font-semibold text-md">
-                    My Profile
+                   
+                     <Link to="/myapllications" className="text-white !no-underline"> My Profile</Link>
+
                 </div>}
             </div>
 
 
-            <div  className={`flex justify-start  gap-2 h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
+            <div  className={`flex justify-start  gap-2 h-9 rounded-lg items-center  ${color==="Upload Resume"&&"bg-[#0E5794]"}  ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
-                    <FiUpload />
+                  
+                     <Link to="/myapllications" className="text-white !no-underline">     <FiUpload /></Link>
+
                 </div>
                {full&&<div className="text font-semibold text-md">
-                    Upload Resume
+                  
+                     <Link to="/myapllications" className="text-white !no-underline">   Upload Resume</Link>
+                    
                 </div>}
             </div>
 
 
-            <div  className={`flex justify-start  gap-2 h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
+            <div  className={`flex justify-start  gap-2 h-9 rounded-lg items-center  ${color==="Settings"&&"bg-[#0E5794]"} ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
-                <IoSettingsOutline />
+              
+                     <Link to="/myapllications" className="text-white !no-underline">  <IoSettingsOutline /></Link>
+
             </div>
                 {full&&<div className="text font-semibold text-md">
-                    Settings
+                    
+                     <Link to="/myapllications" className="text-white !no-underline">Settings</Link>
+
+                    
                 </div>}
             </div>
 
         </div>
 
-        <div className={`flex justify-start  gap-2 h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
+        <div className={`flex justify-start  gap-2 h-9 rounded-lg items-center  ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
             <div className="icon text-2xl">
             <LuLogOut /> 
             </div>

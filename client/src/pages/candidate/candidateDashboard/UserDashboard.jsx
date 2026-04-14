@@ -15,7 +15,7 @@ const UserDashboard = () => {
         setmarginleft(spacesidebar);
     }
     return <div className="conatiner pt-18 flex  ">
-        <Sidebar sidebarspacefunc={sidebarspacefunc} />
+        <Sidebar colortext={"Dashboard"} sidebarspacefunc={sidebarspacefunc} />
         <div className={`maincontent !no-scrollbar h-screen mr-4 ml-20 overflow-y-auto ${marginleft ? "md:ml-66" : "ml-18"} sm:w-full md:ml-24`}>
 
 

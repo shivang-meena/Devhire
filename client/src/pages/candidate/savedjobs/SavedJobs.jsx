@@ -1,66 +1,16 @@
-import { useState } from "react"
-import { HiMagnifyingGlass } from "react-icons/hi2";
-import { IoFunnelOutline } from "react-icons/io5";
-import Select from "react-select";
+import { IoIosHeartEmpty } from "react-icons/io";
+import { useState } from "react";
 import Sidebar from "../candidateDashboard/component/Sidebar";
-import JobCard from "./component/JobCard";
+import JobCard from "../candidateDashboard/component/JobCard";
 
-const JobBrowse = () => {
-    const exp_options = [
-        { value: "All Type", label: "All Type" },
-        { value: "Junior", label: "Junior" },
-        { value: "Mid-level", label: "Mid-level" },
-        { value: "Senior", label: "Senior" },
-    ];
-    const jobtype = [
-        { value: "All Type", label: "All Type" },
-        { value: "Full-Time", label: "Full-Time" },
-        { value: "Contract", label: "Contract" },
-        { value: "Remote", label: "Remote" },
-        { value: "Part-Time", label: "Part-Time" },
-    ];
+const SavedJobs=()=>{
+      let [marginleft, setmarginleft] = useState(false);
+        function sidebarspacefunc(spacesidebar) {
+            setmarginleft(spacesidebar);
+        }
 
-    const jobs = [
-        {
-            companyName: "TechNova Pvt Ltd",
-            role: "Frontend Developer",
-            location: "Bangalore",
-            salary: "6-8 LPA",
-            skills: ["React", "CSS", "JavaScript"],
-            type: "Full-Time",
-            experience: "1-3",
-            postTime: "2 days ago"
-        },
-        {
-            companyName: "InnoSoft Solutions",
-            role: "Backend Developer",
-            location: "Hyderabad",
-            salary: "7-10 LPA",
-            skills: ["Node.js", "Express", "MongoDB"],
-            type: "Contract",
-            experience: "2-4",
-            postTime: "1 day ago"
-        },
-        {
-            companyName: "CodeCraft Systems",
-            role: "Full Stack Developer",
-            location: "Pune",
-            salary: "8-12 LPA",
-            skills: ["React", "Node", "MySQL"],
-            type: "Remote",
-            experience: "3-5",
-            postTime: "3 days ago"
-        },
-        {
-            companyName: "DataMinds",
-            role: "Data Analyst",
-            location: "Delhi",
-            salary: "5-7 LPA",
-            skills: ["Python", "SQL", "Excel"],
-            type: "Part-Time",
-            experience: "1-2",
-            postTime: "5 days ago"
-        },
+        const jobs = [
+      
         {
             companyName: "Cloudify Tech",
             role: "DevOps Engineer",
@@ -272,114 +222,29 @@ const JobBrowse = () => {
             postTime: "2 days ago"
         }
     ];
-
-    let [jobss, setjobss] = useState(jobs);
-    let [globalSearch, setglobalSearch] = useState("");
-    let [exp, setexp] = useState("All Type");
-    let [type, settype] = useState("All Type");
-    let [SearchLocation, setLocSearch] = useState("");
-    function filterjob(type, exp, Search,globalSearchfun) {
-        setexp(exp);
-        settype(type);
-        setLocSearch(Search);
-        setglobalSearch(globalSearchfun);
-
-        let newjobs = jobs.filter((a) => {
-            const typematch = (type === "All Type") || (type === a.type);
-
-            let [min, max] = a.experience.split("-").map(Number);
-
-            let expmathc = true;
-
-            if (exp === "Junior") {
-                expmathc = min <= 2;
-            } else if (exp === "Mid-level") {
-                expmathc = min <= 4;
-            } else if (exp === "Senior") {
-                expmathc = min >= 5;
-            }
-            let Searchmatch = a.location.toLowerCase().includes(Search.toLowerCase());
-
-              let jobvalues = Object.values(a).join(" ").toLowerCase();
-            const isMatch = jobvalues.includes(globalSearchfun.toLowerCase());
-
-            return expmathc && typematch && Searchmatch && isMatch;
-        }
-
-        );
-        setjobss(newjobs);
-    }
-
-
-
-    let [marginleft, setmarginleft] = useState(false);
-    function sidebarspacefunc(spacesidebar) {
-        setmarginleft(spacesidebar);
-    }
+        let [jobss, setjobss] = useState(jobs);
+    
+    
     return <>
-        <div className="conatiner pt-18 flex  ">
-            <Sidebar colortext={"Browse Jobs"} sidebarspacefunc={sidebarspacefunc}/>
-            <div className={`maincontent !no-scrollbar h-screen w-full mr-4 ml-20 overflow-y-auto ${marginleft ? "md:ml-66" : "ml-18"} sm:w-full md:ml-24`}>
+        <div className={`maincontent  mt-20 h-screen ${marginleft ? "md:ml-68" : "ml-20"}`}>
+        <Sidebar colortext={"Saved Jobs"} sidebarspacefunc={sidebarspacefunc} />
+        <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+                <div className="text-3xl font-bold">Saved Jobs</div>
+                <div className="text-lg"><IoIosHeartEmpty/></div>
+            </div>
 
+            <div>
+                
 
-                <div className="flex flex-col ">
-                    <div className="text-[33px] font-bold ">Browse Jobs</div>
-                    <div className="flex items-center gap-2 text-lg"> Find and apply to your dream role</div>
-                </div>
-
-
-
-
-
-                <div className="flex flex-col  py-4 px-0 gap-3 md:flex-row">
-
-                    <div className="flex items-center gap-2 w-full  border-2 border-[#F2F3F4]  rounded-md pl-2 pr-0 h-10 ">
-                        <HiMagnifyingGlass />
-                        <input onChange={(event)=>{filterjob(type,exp,SearchLocation,event.target.value);}} className="border-none outline-none w-full" type="text" placeholder="Browse Jobs Find and apply to your dream role " />
-                    </div>
-                    <div className="flex min-w-[110px] justify-center border-2 border-[#F2F3F4]  rounded-md  p-1 "><button className="flex gap-2 items-center"><IoFunnelOutline /> Reset</button></div>
-                </div>
-
-
-                <div className="flex flex-col  py-4 px-0 gap-3  border-2 border-[#F2F3F4]  rounded-md px-2 md:flex-row  md:justify-between px-4">
-                    <div className=" flex flex-col gap-1">
-                        <div className="text-md font-semibold">Job Type</div>
-                        <div>
-                            <Select onChange={(selectedOption) => { filterjob(selectedOption.value, exp, SearchLocation,globalSearch) }} options={jobtype} />
-                        </div>
-                    </div>
-
-                    <div className=" flex flex-col gap-1">
-                        <div className="text-md font-semibold">
-                            Experience Level
-                        </div>
-                        <Select onChange={(selectedOption) => { filterjob(type, selectedOption.value, SearchLocation,globalSearch) }} options={exp_options} />
-
-                        <div></div>
-                    </div>
-
-                    <div className=" flex flex-col gap-1">
-                        <div className="text-md font-semibold">Location</div>
-                        <div className="flex items-center gap-2 w-full  border-2 border-[#F2F3F4]  rounded-md pl-2 pr-0 h-10 ">
-                            <input onChange={(event) => { filterjob(type, exp, event.target.value,globalSearch) }} className="border-none outline-none w-full" type="text" placeholder="Search by location..." />
-                        </div>
-
-                    </div>
-                </div>
-
-
-
-
-                <div className="flex flex-col gap-4 pt-5">
-                    <div className="text-sm  flex  ">Found 8 jobs</div>
-                    <div className="grid gap-5   [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
-
+                <div className="grid gap-5   [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))] overflow-auto h-[88vh]">
                         {jobss.map((job) => <JobCard experience={job.experience} jobtype={job.type} companyname={job.companyName} role={job.role} location={job.location} salary={job.salary} skills={job.skills} posttime={job.postTime} />)}
-                    </div>
+                     
                 </div>
-
             </div>
         </div>
-    </>
+    </div></>
+
 }
-export default JobBrowse;
+
+export default SavedJobs;

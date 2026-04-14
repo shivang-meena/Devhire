@@ -6,6 +6,8 @@ import CandidateRegistration from "../src/pages/login_register_pages/CandidateRe
 import RoleChoose from "../src/pages/login_register_pages/RoleChoose.jsx"
 import UserDashboard from  "../src/pages/candidate/candidateDashboard/UserDashboard.jsx"
 import JobBrowse from "../src/pages/candidate/Browsejob/JobBrowse.jsx"
+import MyApplications from "../src/pages/candidate/myapplications/MyApplications.jsx"
+import SavedJobs from "../src/pages/candidate/savedjobs/SavedJobs.jsx"
 
 const AppRoutes=()=>{
     return <Routes>
@@ -16,6 +18,8 @@ const AppRoutes=()=>{
         <Route path="/choose-role"  element={<RoleChoose/>} />
         <Route path="/user-dashboard" element={<UserDashboard />}/>
         <Route path="/user-browsejobs" element={<JobBrowse/>}/>
+        <Route path="/myapllications" element={<MyApplications/>} />
+        <Route path="/saved-jobs" element={<SavedJobs/>}/>
         <Route path="*" element={<div className="pt-30">Page Not Found lorem*30</div>} />
     </Routes>
 }
