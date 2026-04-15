@@ -20,7 +20,7 @@ let userSchema=new Schema({
       url:String,
       name:String
      },
-
+ 
 
      //this is candidate only fields
      resume:{

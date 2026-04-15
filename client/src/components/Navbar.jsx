@@ -31,7 +31,7 @@ const PublicNavbar = ({user}) => {
                  
             {user?(<div className="userprofile-name bg-gray-50 flex-center border border-gray-400 rounded-xl w-auto px-4 h-10 gap-2">
                     <div className="profilepic flex-center">
-                        <img src={logo} className="h-6 w-6 border border-gray-200 rounded-xl" alt="" />
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Shivang" className="h-6 w-6 border border-gray-200 rounded-xl" alt="" />
                     </div>
                     <div className="profile-name flex-center">
                             {user}

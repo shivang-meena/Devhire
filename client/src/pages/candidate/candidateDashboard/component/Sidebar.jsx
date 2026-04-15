@@ -81,12 +81,12 @@ const Sidebar = ({sidebarspacefunc,colortext}) => {
             <div className={`flex justify-start  gap-2 h-9 rounded-lg items-center  ${color==="My Profile"&&"bg-[#0E5794]"} ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
                  
-                     <Link to="/myapllications" className="text-white !no-underline">    <GoPerson /></Link>
+                     <Link to="/userprofile" className="text-white !no-underline">    <GoPerson /></Link>
 
                 </div>
               {full&&<div className="text font-semibold text-md">
                    
-                     <Link to="/myapllications" className="text-white !no-underline"> My Profile</Link>
+                     <Link to="/userprofile" className="text-white !no-underline"> My Profile</Link>
 
                 </div>}
             </div>

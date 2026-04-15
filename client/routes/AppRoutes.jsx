@@ -8,7 +8,8 @@ import UserDashboard from  "../src/pages/candidate/candidateDashboard/UserDashbo
 import JobBrowse from "../src/pages/candidate/Browsejob/JobBrowse.jsx"
 import MyApplications from "../src/pages/candidate/myapplications/MyApplications.jsx"
 import SavedJobs from "../src/pages/candidate/savedjobs/SavedJobs.jsx"
-
+import UserProfile from "../src/pages/candidate/profile/UserProfile.jsx"
+import RecruiterDashboard from "../src/pages/recruiter/dashboard/RecruiterDashboard.jsx"
 const AppRoutes=()=>{
     return <Routes>
         <Route path="/" element={<LandingPage></LandingPage>}/>
@@ -20,6 +21,8 @@ const AppRoutes=()=>{
         <Route path="/user-browsejobs" element={<JobBrowse/>}/>
         <Route path="/myapllications" element={<MyApplications/>} />
         <Route path="/saved-jobs" element={<SavedJobs/>}/>
+        <Route path="/userprofile" element={<UserProfile/>}/>
+        <Route path="/recruiterdashboard" element={<RecruiterDashboard/>} />
         <Route path="*" element={<div className="pt-30">Page Not Found lorem*30</div>} />
     </Routes>
 }
