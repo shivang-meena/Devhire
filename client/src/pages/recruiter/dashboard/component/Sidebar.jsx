@@ -6,6 +6,8 @@ import { FaAngleRight } from "react-icons/fa6";
 import { FaChevronLeft } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaShoppingBag } from "react-icons/fa";
+
 
 
 import { IoAdd } from "react-icons/io5";
@@ -50,7 +52,16 @@ const Sidebar = ({sidebarspacefunc,colortext}) => {
             
             </div>
 
+     <div className={`flex justify-start  gap-2 h-9 rounded-lg  ${color==="My Applications"&&"bg-[#0E5794]"} items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
+                <div className="icon text-2xl">
+                   
+                     <Link to="" className="text-white !no-underline"> < FaShoppingBag/></Link>
 
+                </div>
+                {full&&<div className="text font-semibold text-md">
+                     <Link to="" className="text-white !no-underline">My Jobs</Link>
+                </div>}
+            </div>
 
             <div className={`flex justify-start  gap-2 h-9 rounded-lg  ${color==="My Applications"&&"bg-[#0E5794]"} items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
