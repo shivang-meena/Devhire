@@ -19,6 +19,7 @@ const PostJob = () => {
         { value: "Part-Time", label: "Part-Time" },
     ];
 
+    
     const exp_options = [
         { value: "All Type", label: "All Type" },
         { value: "Junior (0-2)", label: "Junior (0-2)" },

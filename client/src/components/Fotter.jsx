@@ -14,9 +14,9 @@ const Fotter = () => {
  {/* ok so isko context se lekar set karna hai dashboard ke liey ok  */}
 
         
-    <div className="outer-div-fotter px-10  pt-10 bg-white">
-        <div className="upper-fotter grid gap-8 sm:grid-cols-2 pb-10 lg:grid-cols-5 text-md ">
-            <div className="flex flex-col gap-5">
+    <div className="outer-div-fotter pt-10 px-10    bg-white">
+        <div className="upper-fotter  grid gap-8 sm:grid-cols-2 pb-10 lg:grid-cols-5 text-md ">
+            <div className="flex flex-col gap-5 ">
                 <div className="web-logo-text flex  items-center gap-2 text-xl font-bold">
                     <div className="web-logo bg-black w-10 h-10 rounded-lg  flex-center ">
                         <img src={logo} className="w-7 h-7 rounded-md " alt="" />

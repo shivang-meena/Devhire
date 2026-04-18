@@ -16,7 +16,7 @@ function App() {
  <main>
  <AppRoutes></AppRoutes>
  </main>
-    <Fotter ></Fotter>
+    <Fotter className="z-50" ></Fotter>
        </AuthProvider>
 
 
