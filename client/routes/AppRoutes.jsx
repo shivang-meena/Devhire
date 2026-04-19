@@ -13,6 +13,7 @@ import RecruiterDashboard from "../src/pages/recruiter/dashboard/RecruiterDashbo
 import PostJob from "../src/pages/recruiter/postjob/PostJob.jsx"
 import MyJobs from "../src/pages/recruiter/myjobs/MyJobs.jsx"
 import Applicants from "../src/pages/recruiter/applicants/Applicants.jsx"
+import Profile from "../src/pages/recruiter/profile/Profile.jsx"
 const AppRoutes=()=>{
     return <Routes>
         <Route path="/" element={<LandingPage></LandingPage>}/>
@@ -29,6 +30,7 @@ const AppRoutes=()=>{
         <Route path="/postjob" element={<PostJob/>}/>
         <Route path="/jobsposted" element={<MyJobs/>}/>
         <Route path="/applicants" element={<Applicants/>} />
+        <Route path="/recruiter-profile" element={<Profile/>}/>
         <Route path="*" element={<div className="pt-30">Page Not Found lorem*30</div>} />
     </Routes>
 }
