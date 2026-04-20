@@ -35,11 +35,11 @@ export const login = async (req, res) => {
         const { email, password } = req.body;
         let checkuser = await User.findOne({ email: email });
         if (!checkuser) {
-            return res.status(400).json({ message: "please enter valid email" })
+            return res.status(401).json({ message: "please enter valid email" })
         }
         let result = await bcrypt.compare(password, checkuser.password);
         if (!result) {
-            return res.status(400).json({ message: "please enter valid password" })
+            return res.status(401).json({ message: "please enter valid password" })
         }
 
         const token = jwt.sign(
