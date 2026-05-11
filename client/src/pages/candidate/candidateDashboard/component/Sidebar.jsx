@@ -8,11 +8,13 @@ import { FiUpload } from "react-icons/fi";
 import { LuLogOut } from "react-icons/lu";
 import { FaAngleRight } from "react-icons/fa6";
 import { FaChevronLeft } from "react-icons/fa";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../../../context/AuthContext";
 
 
 const Sidebar = ({sidebarspacefunc,colortext}) => {
+      const {logout}=useContext(AuthContext);
     let [full,setfull]=useState(false);
     let [color,setcolor]=useState(colortext);
     return<> 
@@ -23,12 +25,12 @@ const Sidebar = ({sidebarspacefunc,colortext}) => {
             <div className={`flex justify-start  gap-2 ${color==="Dashboard"&&"bg-[#0E5794]"} h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
                    
-                     <Link to="/user-dashboard" className="text-white !no-underline"> <RiDashboardLine /> </Link>
+                     <Link to="/candidate/dashboard" className="text-white !no-underline"> <RiDashboardLine /> </Link>
                     
                 </div>
                 {full&&<div className="text font-semibold text-md">
                    
-                     <Link to="/user-dashboard" className="text-white !no-underline">  Dashboard</Link>
+                     <Link to="/candidate/dashboard" className="text-white !no-underline">  Dashboard</Link>
                     
                 </div>}
                 
@@ -39,12 +41,12 @@ const Sidebar = ({sidebarspacefunc,colortext}) => {
             <div className={`flex justify-start  gap-2  h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
                     
-                     <Link to="/user-browsejobs" className="text-white !no-underline"><FaShoppingBag /></Link>
+                     <Link to="/candidate/browsejobs" className="text-white !no-underline"><FaShoppingBag /></Link>
                     
                 </div>
                {full&&<div className="text font-semibold text-md">
                    
-                     <Link to="/user-browsejobs" className="text-white !no-underline">Browse Jobs</Link>
+                     <Link to="/candidate/browsejobs" className="text-white !no-underline">Browse Jobs</Link>
                     
                 </div>}
             </div>
@@ -55,11 +57,11 @@ const Sidebar = ({sidebarspacefunc,colortext}) => {
             <div className={`flex justify-start  gap-2 h-9 rounded-lg  ${color==="My Applications"&&"bg-[#0E5794]"} items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
                    
-                     <Link to="/myapllications" className="text-white !no-underline"> <IoMdCheckboxOutline /></Link>
+                     <Link to="/candidate/myapllications" className="text-white !no-underline"> <IoMdCheckboxOutline /></Link>
 
                 </div>
                 {full&&<div className="text font-semibold text-md">
-                     <Link to="/myapllications" className="text-white !no-underline">My Applications</Link>
+                     <Link to="/candidate/myapllications" className="text-white !no-underline">My Applications</Link>
                 </div>}
             </div>
 
@@ -67,12 +69,12 @@ const Sidebar = ({sidebarspacefunc,colortext}) => {
             <div   className={`flex justify-start  gap-2 h-9 rounded-lg  ${color==="Saved Jobs"&&"bg-[#0E5794]"} items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
                    
-                     <Link to="/saved-jobs" className="text-white !no-underline"> <IoIosHeartEmpty /></Link>
+                     <Link to="/candidate/saved-jobs" className="text-white !no-underline"> <IoIosHeartEmpty /></Link>
 
                 </div>
               {full&&<div className="text font-semibold text-md">
                  
-                     <Link to="/saved-jobs" className="text-white !no-underline">Saved Jobs</Link>
+                     <Link to="/candidate/saved-jobs" className="text-white !no-underline">Saved Jobs</Link>
                     
                 </div>}
             </div>
@@ -81,12 +83,12 @@ const Sidebar = ({sidebarspacefunc,colortext}) => {
             <div className={`flex justify-start  gap-2 h-9 rounded-lg items-center  ${color==="My Profile"&&"bg-[#0E5794]"} ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
                  
-                     <Link to="/userprofile" className="text-white !no-underline">    <GoPerson /></Link>
+                     <Link to="/candidate/userprofile" className="text-white !no-underline">    <GoPerson /></Link>
 
                 </div>
               {full&&<div className="text font-semibold text-md">
                    
-                     <Link to="/userprofile" className="text-white !no-underline"> My Profile</Link>
+                     <Link to="/candidate/userprofile" className="text-white !no-underline"> My Profile</Link>
 
                 </div>}
             </div>
@@ -100,7 +102,7 @@ const Sidebar = ({sidebarspacefunc,colortext}) => {
                 </div>
                {full&&<div className="text font-semibold text-md">
                   
-                     <Link to="/myapllications" className="text-white !no-underline">   Upload Resume</Link>
+                     <Link to="/myapl" className="text-white !no-underline">   Upload Resume</Link>
                     
                 </div>}
             </div>
@@ -123,11 +125,11 @@ const Sidebar = ({sidebarspacefunc,colortext}) => {
         </div>
 
         <div className={`flex justify-start  gap-2 h-9 rounded-lg items-center  ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
-            <div className="icon text-2xl">
-            <LuLogOut /> 
+            <div onClick={logout} className="icon text-2xl">
+            <Link to={"/"}   className="text-white !no-underline"> <LuLogOut /></Link> 
             </div>
-              {full&&<div className="text font-semibold text-md">
-                    Logout
+              {full&&<div onClick={logout}  className="text font-semibold text-md">
+                  <Link className="text-white !no-underline" to={"/"}>Logout</Link> 
                 </div>}
         </div>
         <div className="sidebar-closeopen flex-center justify-start  w-full gap-2 h-12 pl-2 rounded-lg items-center">

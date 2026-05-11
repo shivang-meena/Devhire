@@ -46,7 +46,8 @@ let userSchema=new Schema({
       type:Date,
       default:null
      },
-
+     savedJobs: [{ type: Schema.Types.ObjectId, ref: "Job" }],
+     
      isBlocked: { type: Boolean, default: false }//this is for admin if admin want to block any candidatre or user
      
 }, { timestamps: true });

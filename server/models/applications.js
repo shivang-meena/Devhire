@@ -14,8 +14,8 @@ let ApplicationsSchema=new Schema({
     },
      status:{
         type:String,
-         enum: ["applied", "reviewed", "interview", "selected", "rejected"],
-         default:"applied"
+         enum: ["Applied", "Reviewed", "Interview", "Selected", "Rejected"],
+         default:"Applied"
      },
      coverLetter:String
 }, { timestamps: true });

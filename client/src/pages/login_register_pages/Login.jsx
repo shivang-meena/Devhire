@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
- 
+    const navigate=useNavigate();
+    const {login}=useContext(AuthContext);
+
     let [email,setemail]=useState("");
     let [password,setpassword]=useState("");
     let [errormsg,seterrmsg]=useState("");
+
 async function handlesubmit(event){
       event.preventDefault()
      try{
@@ -12,13 +18,22 @@ async function handlesubmit(event){
     headers: { "Content-Type": "application/json" },
         body:JSON.stringify({email,password})
       });
-      const token=await res.json();
+      const {checkuser,token}=await res.json();
       if(!res.ok){
        seterrmsg(token.message||"any thigin was failed ");
        return;
       }
 
-      console.log(token);
+      console.log(checkuser);
+      login(checkuser,token);
+      if(checkuser.role==="recruiter"){
+          navigate("/recruiter/dashboard");
+      }else if(checkuser.role==="candidate"){
+               navigate("/candidate/dashboard");
+      }else if(checkuser.role==="admin"){
+               navigate("/admin/dashboard");
+      }
+      
      }catch{
        seterrmsg("check your network connection");
      }

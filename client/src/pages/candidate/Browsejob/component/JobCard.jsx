@@ -4,6 +4,10 @@ import { IoIosHeartEmpty } from "react-icons/io";
 
 
 const JobCard = ({companyname,role,location,salary,skills,posttime,jobtype,experience}) => {
+    function formatdate(time){
+        const date=new Date(time);
+        return date.toLocaleString("en-IN");
+    };
     return <>
 
         <div id={posttime} className="jobcard flex flex-col p-6  border-2 border-[#E2E5E8]   rounded-lg gap-8 max-w-170 md:max-w-100">
@@ -51,7 +55,7 @@ const JobCard = ({companyname,role,location,salary,skills,posttime,jobtype,exper
 
             <div className="time-posted-applybutton flex justify-between">
                 <div className="time-posted text-[#797b7c]">
-                    {posttime}
+                    {formatdate(posttime)}
                 </div>
                 <div className="applynowbtn">
                     Apply Now

@@ -5,8 +5,7 @@ if (process.env.NODE_ENV != "production") {
 }
 
 export const  authMiddleware=(req,res,next)=>{
-
-
+    
     const token=req.headers.authorization?.split(" ")[1];
      if(!token){
         return res.status(400).send("no valid token");
@@ -15,10 +14,9 @@ export const  authMiddleware=(req,res,next)=>{
       try{
           const decode=jwt.verify(token,process.env.JWT_SECRET);
           req.user=decode;
-        //   console.log(req.user._id+"  hbbjjbhjbjhb ");
          next();
       }catch(err){
-        res.status(400).json({message:err+" i am here and id was nto define d"});
+        res.status(400).json({message:err+" i am in auth middileware "});
       }
 }
 

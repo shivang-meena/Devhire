@@ -1,4 +1,42 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const RecruiterRegistration=()=>{
+        let navigate=useNavigate();
+ 
+
+      const [userdata, setuserdata] = useState({
+            name: "",
+            email: "",
+            password: "",
+            companyname: "",
+            descripton: "",
+           
+        });
+    const [err, seterr] = useState("");
+ async function handleregister(event) {
+        event.preventDefault();
+
+        const res = await fetch("http://localhost:5000/user/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...userdata, role: "recruiter" })
+        });
+
+        const result = await res.json();
+        if (result.errors) {
+            console.log(result.errors[0].msg);
+            seterr(result.errors[0].msg)
+            return;
+        }
+        if(result.message==="Email already exists"){
+          seterr(result.message);
+          return;
+        }
+      console.log(result);
+        navigate("/login");
+       
+    }
+
 return <div className="loginpage min-h-screen w-full flex-center pt-30 pb-30 px-2">
 
         <div className="loginform flex-center flex-col w-120 h-auto border border-[#E2E5E8] px-10 gap-8 rounded-lg shadow-lg p-10">
@@ -10,17 +48,17 @@ return <div className="loginpage min-h-screen w-full flex-center pt-30 pb-30 px-
                    Create an account to start hiring top talent
                 </div>
             </div>
-            <form action="" noValidate className="needs-validation w-full flex flex-col gap-3">
+            <form action="" onSubmit={handleregister} noValidate className="needs-validation w-full flex flex-col gap-3">
                <div className="emaillabelinput flex flex-col ">
                  <label htmlFor="" className="form-label">
                     Full Name
                 </label>
-                <input type="text" className="form-control" placeholder="Enter Full Name" />
+                <input type="text" onChange={ (event) => { setuserdata({ ...userdata, name: event.target.value }); seterr("") }}  className="form-control" placeholder="Enter Full Name" />
                </div>
 
               <div className="passwordinputlabel flex flex-col ">
                   <label htmlFor="" className="form-label">Email Address</label>
-                <input type="email" className="form-control" placeholder="Enter Email" />
+                <input type="email" onChange={(event) => { setuserdata({ ...userdata, email: event.target.value }); console.log(event.target.value); seterr("") }}  className="form-control" placeholder="Enter Email" />
               </div>
 
 
@@ -29,7 +67,7 @@ return <div className="loginpage min-h-screen w-full flex-center pt-30 pb-30 px-
                  <label htmlFor="" className="form-label">
                     Password
                 </label>
-                <input type="password" className="form-control" placeholder="Enter Password" />
+                <input type="password" onChange={(event) => {  setuserdata({ ...userdata, password: event.target.value }); seterr(""); }}  className="form-control" placeholder="Enter Password" />
                </div>
 
 
@@ -37,14 +75,14 @@ return <div className="loginpage min-h-screen w-full flex-center pt-30 pb-30 px-
                  <label htmlFor="" className="form-label">
                   Company Name
                 </label>
-                <input type="text" className="form-control" placeholder="Enter Company Name" />
+                <input type="text"  onChange={(event) => {  setuserdata({ ...userdata, companyname: event.target.value }); seterr(""); }}   className="form-control" placeholder="Enter Company Name" />
                </div>
 
                 <div className="emaillabelinput flex flex-col ">
                  <label htmlFor="" className="form-label">
                      Comapany Description
                 </label>
-                <textarea type="text" rows={5} className="form-control" placeholder="Description..." />
+                <textarea type="text"  onChange={(event) => {  setuserdata({ ...userdata, descripton: event.target.value }); seterr(""); }}   rows={5} className="form-control" placeholder="Description..." />
                </div>
 
                 <button className="btn btn-dark">Create Account</button>

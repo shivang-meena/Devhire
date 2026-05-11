@@ -34,7 +34,7 @@ export const viewMyapplications=async(req,res)=>{
     const {_id}=req.user;
      const result=await Application.find({applicantId:_id});
      if(result){
-    res.status(200).json({messege:result});
+    res.status(200).json({messege:"sucess ",result});
      }else{
          res.status(400).json({messege:"ther is no such applications "});
      }

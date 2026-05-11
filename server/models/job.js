@@ -17,6 +17,7 @@ let jobSchema=new Schema({
      },
      salary:String,
      experience:String,
+     Companyname:String,
      isOpen: { type: Boolean, default: true }//in recurite hand it can change status on fullfillment 
 
 }, { timestamps: true });

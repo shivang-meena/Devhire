@@ -10,6 +10,7 @@ import { validationResult } from "express-validator"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 
+
 //this was the whole regestration system 
 export const registration = async (req, res) => {
     let errors = validationResult(req)//this is express defaulst validation we put all valdiation in middeware validator.js and so this verfy from there 
@@ -22,6 +23,7 @@ export const registration = async (req, res) => {
         console.log(result);
         res.status(201).json({ message: "User registered successfully" })
     } catch (err) {
+        console.log(req.body);
         if (err.code === 11000) {
             return res.status(400).json({ message: "Email already exists" })
         }
@@ -53,7 +55,7 @@ export const login = async (req, res) => {
             }
         );
 
-        res.status(200).json({ token, message: "Login successful" })
+        res.status(200).json({ token,checkuser , message: "Login successful" })
 
 
     } catch (err) {

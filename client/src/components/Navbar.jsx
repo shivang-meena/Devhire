@@ -1,9 +1,16 @@
 import { useState } from 'react';
 import logo from '../assets/f700fabe-7937-4a0b-a1fa-1480778bbe02.jpg';
 import { X, Menu } from "lucide-react"//this is lucide react librrary icon cross and threelines icon for ham nav 
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { Link } from "react-router-dom";
 
-const PublicNavbar = ({user}) => {
-    {user="sdnfkasndfm"}
+const PublicNavbar = () => {
+      const {user:tempuser}=useContext(AuthContext);
+      let user="";
+      if (tempuser) {
+        user=tempuser.name;
+    }
     let [mobilenav, setmobilenav] = useState(false);
     return <>
         <div className=" transition-all flex fixed top-0 left-0   w-full  h-16 text-black justify-center items-center bg-white/30 backdrop-blur-md">
@@ -39,10 +46,10 @@ const PublicNavbar = ({user}) => {
                  </div>):(<div className="flex-center gap-5 border border-gray-300 p-1 rounded-md w-45">
                         <div className="login flex-center w-13 no-underline">
                             
-                            <a href="http://localhost:5173/login?" className="!no-underline text-black">Log in</a>
+                            <Link to={"/login"} className="!no-underline text-black">Log in</Link>
                         </div>
                         <div className="signup bg-black w-23 h-9 font-semibold text-white rounded-lg flex-center">
-                             <a href="http://localhost:5173/choose-role" className="!no-underline text-white">Register</a>
+                             <Link to={"/choose-role"} className="!no-underline text-white">Register</Link>
                         </div>
 
                     </div>)}

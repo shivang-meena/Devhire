@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Applicationcard from "./component/Applicationcard";
 import Sidebar from "../candidateDashboard/component/Sidebar";
+import { ApplicationContext } from "../../../../context/ApplicationContext";
 
 const MyApplications = () => {
     let [marginleft, setmarginleft] = useState(false);
@@ -91,8 +92,14 @@ const Applicationsdatafake = [
   }
 ];
 
-let [Applicationsdata,setapplicationsdata]=useState(Applicationsdatafake);
+const {applications}=useContext(ApplicationContext);
+
+
+let [Applicationsdata,setapplicationsdata]=useState(applications);
 let [clicked,setclicked]=useState("All");
+
+
+
 function filterapplications(type) {
     if (type === "All") {
         setapplicationsdata(Applicationsdatafake);

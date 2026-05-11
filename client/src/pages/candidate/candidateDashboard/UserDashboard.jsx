@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Sidebar from "./component/Sidebar";
 import { SlCalender } from "react-icons/sl";
 import { IoIosHeartEmpty } from "react-icons/io";
@@ -6,15 +6,56 @@ import { FaShoppingBag } from "react-icons/fa";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { CiLocationOn } from "react-icons/ci";
-import JobCard from "./component/JobCard";
-
+import JobCard from "../Browsejob/component/JobCard.jsx";
+import { AuthContext } from "../../../../context/AuthContext";
+import {JobContext} from "../../../../context/JobContext.jsx"
 
 const UserDashboard = () => {
+     const {Jobs}=useContext(JobContext);
+     const {token,user,loading}=useContext(AuthContext);
+     const [Applicationsarr,setApplicationsarr]=useState([]);
+     const [Inteviewapplicationcnt,setInteviewapplcationcnt]=useState(0);
+
     let [marginleft, setmarginleft] = useState(false);
     function sidebarspacefunc(spacesidebar) {
         setmarginleft(spacesidebar);
     }
-    return <div className="conatiner pt-18 flex  ">
+    async function fetchapplication() {
+      
+        console.log(Jobs);
+        // const token=localStorage.getItem('token');
+        console.log(token +"thi sis in frontend ");
+        const res=await fetch("http://localhost:5000/applications/my-applications",
+            {
+                method:"GET",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":`Bearer ${token}`
+                }
+            }
+        ); 
+        const json=await res.json();
+        const data=json.result;
+        // const data=[1,2,3,4];
+        console.log(data);
+        const inteviewonlyapplidata=data.filter((appli)=>{
+            return appli.status==="Interview"
+        });
+        setInteviewapplcationcnt(inteviewonlyapplidata.length);
+       setApplicationsarr(data||[]);
+     }
+
+
+    useEffect(()=>{
+    fetchapplication();
+    },[]);
+ 
+    if (loading) {
+        console.log("laoding");
+        return;
+    }
+
+    return <><div className="conatiner pt-18 flex  ">
         <Sidebar colortext={"Dashboard"} sidebarspacefunc={sidebarspacefunc} />
         <div className={`maincontent !no-scrollbar h-screen mr-4 ml-20 overflow-y-auto ${marginleft ? "md:ml-66" : "ml-18"} sm:w-full md:ml-24`}>
 
@@ -31,7 +72,7 @@ const UserDashboard = () => {
                 <div className="flex min-w-3xs justify-between items-center border border shadow-sm rounded-xl h-40 px-4 md:min-w-xs">
                     <div className="flex flex-col  ">
                         <div className="text-sm">Applications</div>
-                        <div className="text-2xl font-bold">12</div>
+                        <div className="text-2xl font-bold">{Array.isArray(Applicationsarr)?Applicationsarr.length:0}</div>
                     </div>
                     <div className="text-3xl bg-[#DBEAFE] p-2 rounded-md"><IoMdCheckboxOutline /></div>
                 </div>
@@ -39,7 +80,7 @@ const UserDashboard = () => {
                 <div className="flex  min-w-3xs justify-between items-center border border shadow-sm rounded-xl h-40 px-4 md:min-w-xs">
                     <div className="flex flex-col  ">
                         <div className="text-sm">Interviews</div>
-                        <div className="text-2xl font-bold">3</div>
+                        <div className="text-2xl font-bold">{Inteviewapplicationcnt}</div>
                     </div>
                     <div className="text-3xl bg-[#DBFCE7] p-2 rounded-md text-[#008236]"><FaShoppingBag /></div>
                 </div>
@@ -47,7 +88,7 @@ const UserDashboard = () => {
                 <div className="flex  min-w-3xs justify-between items-center border border shadow-sm rounded-xl h-40 px-4 md:min-w-xs">
                     <div className="flex flex-col  ">
                         <div className="text-sm">Saved Jobs</div>
-                        <div className="text-2xl font-bold">28</div>
+                        <div className="text-2xl font-bold">{user.savedJobs.length}</div>
                     </div>
                     <div className="text-3xl bg-[#FFE2E2] p-2 rounded-md text-[#C10007]"><IoIosHeartEmpty /></div>
                 </div>
@@ -67,15 +108,20 @@ const UserDashboard = () => {
             <div className="flex flex-col gap-4 pt-5">
                 <div className="text-2xl font-bold flex  ">Featured jobs</div>
                 <div className="grid gap-5   [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
+                    {/* <JobCard/>
                     <JobCard/>
                     <JobCard/>
                     <JobCard/>
-                    <JobCard/>
-                    <JobCard/>
+                    <JobCard/> */}
+
+                { Array.isArray(Jobs)&&Jobs.map((job)=>{
+                    return <JobCard companyname={job.companyname} role={job.title} location={job.location} salary={job.salary}  skills={job.skillsNeeded} posttime={job.createdAt} jobtype={job.jobType} experience={job.experience} />
+                })}
+
                 </div>
             </div>
 
         </div>
-    </div>
+    </div></>
 }
 export default UserDashboard;
