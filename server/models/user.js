@@ -28,8 +28,16 @@ let userSchema=new Schema({
       name:String
      },
      skills:[String],
-     experience:String,
-     education:String,
+     experience:[{
+      companyname:String,
+      role:String,
+      duration:String
+     }],
+     education:[{
+      university:String,
+      degree:String,
+      graduatedate:String
+     }],
 
 
      //recruiter only fields 

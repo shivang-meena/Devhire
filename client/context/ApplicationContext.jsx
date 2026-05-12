@@ -5,7 +5,7 @@ import { AuthContext } from "./AuthContext";
 export const ApplicationContext=createContext();
 
 export const ApplicationProvider=({children})=>{
-   let [applications,setapplications]=useState([]);
+   let [applications,setapplications]=useState();
     const {token}=useContext(AuthContext);
    async function fetchapplications() {
           const res=await fetch("http://localhost:5000/applications/my-applications",{
@@ -15,13 +15,13 @@ export const ApplicationProvider=({children})=>{
           });
           const applicationdata=await res.json();
           console.log(applicationdata);
-          setapplications(applicationdata);
+          setapplications(applicationdata.result);
           console.log("fmasnfasnfnaskdfnkaj");
    }
 
    useEffect(()=>{
-      console.log("thre is no tokn jherer ");
       if (!token) {
+         console.log("thre is no tokn jherer ");
          return;
       }
       fetchapplications();

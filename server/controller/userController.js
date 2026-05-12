@@ -64,12 +64,12 @@ export const uploadresume=async(req,res)=>{
        const {_id}=req.user;
      let result = await User.findByIdAndUpdate(_id, {"resume.url":url,"resume.name":name}, { new: true });
        if (result) {
-        res.status(200).json({messege:result});
+        res.status(200).json({messege:"uploaded",user:result});
               }else{
-             res.status(400).json({messege:"resume uplaod  succesfully "});
+             res.status(400).json({messege:"uploaded",user:result});
               }
 } catch (err) {
-             res.status(400).json({messege:err+" "});
+             res.status(400).json({messege:err+" ",user:null});
         }
 
 }

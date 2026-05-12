@@ -18,6 +18,8 @@ import Admindashboard from "../src/pages/admin/dashboard/Admindashboard.jsx"
 import ManageUsers from "../src/pages/admin/manageusers/ManageUsers.jsx"
 import Managejobs from "../src/pages/admin/managejobs/Managejobs.jsx"
 import ProtectedRoutes from "./ProtectedRoute.jsx"
+import JobDetails from "../src/pages/candidate/Jobdetail/JobDetails.jsx"
+
 import { useContext } from "react"
 import { AuthContext } from "../context/AuthContext.jsx"
 import { Navigate } from "react-router-dom"
@@ -66,13 +68,21 @@ const AppRoutes=()=>{
                 <SavedJobs/>
             </ProtectedRoutes>
             }/>
+            
         <Route path="/candidate/userprofile" element={
             <ProtectedRoutes role={"candidate"}>
                 <UserProfile/>
             </ProtectedRoutes>
             }/>
 
+            <Route path="/candidate/jobdetail/:jobid" element={
+              <ProtectedRoutes role={"candidate"}>
+                <JobDetails/>
+              </ProtectedRoutes>
+            }/>
 
+
+{/* recurite routes */}
         <Route path="/recruiter/dashboard" element={
             <ProtectedRoutes role={"recruiter"}>
             <RecruiterDashboard/>

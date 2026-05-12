@@ -115,7 +115,7 @@ const UserDashboard = () => {
                     <JobCard/> */}
 
                 { Array.isArray(Jobs)&&Jobs.map((job)=>{
-                    return <JobCard companyname={job.companyname} role={job.title} location={job.location} salary={job.salary}  skills={job.skillsNeeded} posttime={job.createdAt} jobtype={job.jobType} experience={job.experience} />
+                    return <JobCard Jobid={job._id} companyname={job.companyname} role={job.title} location={job.location} salary={job.salary}  skills={job.skillsNeeded} posttime={job.createdAt} jobtype={job.jobType} experience={job.experience} />
                 })}
 
                 </div>

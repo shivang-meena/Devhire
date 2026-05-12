@@ -14,9 +14,45 @@ import { AuthContext } from "../../../../../context/AuthContext";
 
 
 const Sidebar = ({sidebarspacefunc,colortext}) => {
-      const {logout}=useContext(AuthContext);
+    const {token,logout,setuser,updatefullprofile}=useContext(AuthContext);
     let [full,setfull]=useState(false);
     let [color,setcolor]=useState(colortext);
+    let [resume,setresume]=useState(null);
+      
+    
+   
+   async function uploadresume(file) {
+    const formdata=new FormData();
+    formdata.append('resume',file);
+    try {
+         const res=await fetch("http://localhost:5000/user/upload-resume",
+            {
+                method:"PUT",
+                headers:{
+                    "Authorization":`Bearer ${token}`
+                },
+                body:formdata 
+            }
+        );
+
+        const data=await res.json();
+       
+        if(data.messege=="uploaded"){
+          alert("resume uplaoded succsfully");
+           console.log(data);
+          localStorage.setItem('user', JSON.stringify(data.user));
+            
+          setuser(data.user);
+        }else{
+            console.log(data.messege);
+        }
+            console.log(data);
+    } catch (err) {
+        console.log(err);
+    } 
+    
+    }
+
     return<> 
     <div className={`transition-all duration-300 fixed top-15 left-0 flex flex-col bg-[#0A345A] text-white p-4 gap-4 h-screen ${!full?"w-16 items-center":"w-64"} `}>
         <div className={`options-sidebar flex flex-col  gap-3  `}>
@@ -29,9 +65,7 @@ const Sidebar = ({sidebarspacefunc,colortext}) => {
                     
                 </div>
                 {full&&<div className="text font-semibold text-md">
-                   
                      <Link to="/candidate/dashboard" className="text-white !no-underline">  Dashboard</Link>
-                    
                 </div>}
                 
             </div>
@@ -95,16 +129,17 @@ const Sidebar = ({sidebarspacefunc,colortext}) => {
 
 
             <div  className={`flex justify-start  gap-2 h-9 rounded-lg items-center  ${color==="Upload Resume"&&"bg-[#0E5794]"}  ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
-                <div className="icon text-2xl">
+               
                   
-                     <Link to="/myapllications" className="text-white !no-underline">     <FiUpload /></Link>
-
-                </div>
+                    <label htmlFor="resume" className=" icon text-2xl text-white !no-underline">     <FiUpload /></label>
+                     <input type="file" id="resume" onChange={(event)=>{ const file=event.target.files[0]; uploadresume(file);}} className="h-0 w-0" />
+                
                {full&&<div className="text font-semibold text-md">
-                  
-                     <Link to="/myapl" className="text-white !no-underline">   Upload Resume</Link>
-                    
+                     
+                     <label htmlFor="resume"  className="text-white !no-underline">Upload Resume</label>
+                      
                 </div>}
+               
             </div>
 
 

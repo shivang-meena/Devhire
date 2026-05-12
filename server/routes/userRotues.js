@@ -11,7 +11,7 @@ const uploadresumeconfig=multer({storage:storageResume});
 
 route.put("/update-profile",authMiddleware,updateProfile);
 
-route.put("/upload-picture",authMiddleware,roleMiddileware("candidate"),uploadprofile.single("picture"),uploadprofilepic);
+route.put("/upload-picture",authMiddleware,roleMiddileware("candidate"),uploadprofile.single("profilepicture"),uploadprofilepic);
 
 route.put("/upload-resume",authMiddleware,roleMiddileware("candidate"),uploadresumeconfig.single("resume"),uploadresume);
 

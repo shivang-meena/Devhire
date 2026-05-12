@@ -8,7 +8,7 @@ export const AuthContext=createContext();
 export const AuthProvider=({children})=>{
     const navigate=useNavigate();
     const [user,setuser]=useState(null);
-    const [loading,setloading]=useState(false);
+    const [loading,setloading]=useState(true);
     const [token,settoken]=useState("");
     const login=(userdetail,token)=>{
         setuser(userdetail);
@@ -16,6 +16,38 @@ export const AuthProvider=({children})=>{
         localStorage.setItem('user',JSON.stringify(userdetail));
         settoken(token);
     }
+
+
+    
+ async function updatefullprofile(userdata){
+  
+        try {
+            const res = await fetch("http://localhost:5000/user/update-profile",
+                {
+                    method: "Put",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify(
+                        {
+                          ...userdata
+                        }
+                    )
+
+                }
+            );
+
+            const data = await res.json();
+
+            console.log("full profole was updated ");
+            console.log(data);
+            localStorage.setItem('user', JSON.stringify(data.messege));
+            setuser(data.messege);
+        } catch (error) {
+            console.log(error);
+        }
+ }
     
 
     const logout=()=>{
@@ -40,7 +72,7 @@ export const AuthProvider=({children})=>{
     },[]);
 
     return(
-        <AuthContext.Provider value={{user,loading,setloading,login,logout,token}}>
+        <AuthContext.Provider value={{user,updatefullprofile,setuser,loading,setloading,login,logout,token}}>
           {children}
         </AuthContext.Provider>
     );

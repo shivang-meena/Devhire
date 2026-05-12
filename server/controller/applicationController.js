@@ -6,13 +6,13 @@ import {Job} from "../models/job.js"
 export const applyJob=async (req,res)=>{
    try{
 
+       const {jobid}=req.params;
+       const {_id}=req.user;
     const existing = await Application.findOne({ applicantId: _id, jobid })
 if(existing) {
     return res.status(400).json({ message: "Already applied to this job" })
 }
 
-       const {jobid}=req.params;
-       const {_id}=req.user;
        console.log("i am here and ther is no eroro ",_id);
        const alldetails={...req.body,applicantId:_id,jobid};
    

@@ -134,7 +134,7 @@ const JobBrowse = () => {
                     <div className="text-sm  flex  ">Found 8 jobs</div>
                     <div className="grid gap-5   [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
 
-                        {jobss.map((job) => <JobCard companyname={job.companyname} role={job.title} location={job.location} salary={job.salary}  skills={job.skillsNeeded} posttime={job.createdAt} jobtype={job.jobType} experience={job.experience}  />)}
+                        {jobss.map((job) => <JobCard Jobid={job._id} companyname={job.companyname} role={job.title} location={job.location} salary={job.salary}  skills={job.skillsNeeded} posttime={job.createdAt} jobtype={job.jobType} experience={job.experience}  />)}
                     </div>
                 </div>
 

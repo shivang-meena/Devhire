@@ -1,16 +1,17 @@
 import { MdLocationPin } from "react-icons/md";
 import { BiDollar } from "react-icons/bi";
 import { IoIosHeartEmpty } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 
-const JobCard = ({companyname,role,location,salary,skills,posttime,jobtype,experience}) => {
+const JobCard = ({Jobid,companyname,role,location,salary,skills,posttime,jobtype,experience}) => {
     function formatdate(time){
         const date=new Date(time);
         return date.toLocaleString("en-IN");
     };
     return <>
-
-        <div id={posttime} className="jobcard flex flex-col p-6  border-2 border-[#E2E5E8]   rounded-lg gap-8 max-w-170 md:max-w-100">
+   <Link to={`/candidate/jobdetail/${Jobid}`} className="!no-underline !text-inherit " >
+        <div id={posttime} className="jobcard  flex flex-col p-6  border-2 border-[#E2E5E8]   rounded-lg gap-8 max-w-170 md:max-w-100">
 
             <div className="type-button flex justify-between items-center">
                 <div className="T-button border border-[#E2E5E8]  h-12 w-12 flex-center rounded-sm bg-[#E2E5E8] text-xl">
@@ -62,6 +63,7 @@ const JobCard = ({companyname,role,location,salary,skills,posttime,jobtype,exper
                 </div>
             </div>
         </div>
+        </Link>
     </>
 }
 

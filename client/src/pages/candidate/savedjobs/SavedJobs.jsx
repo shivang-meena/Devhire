@@ -1,13 +1,12 @@
 import { IoIosHeartEmpty } from "react-icons/io";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Sidebar from "../candidateDashboard/component/Sidebar";
-import JobCard from "../candidateDashboard/component/JobCard";
+import JobCard from "../Browsejob/component/JobCard";
+import { JobContext } from "../../../../context/JobContext";
 
 const SavedJobs=()=>{
-      let [marginleft, setmarginleft] = useState(false);
-        function sidebarspacefunc(spacesidebar) {
-            setmarginleft(spacesidebar);
-        }
+
+    
 
         const jobs = [
       
@@ -222,10 +221,37 @@ const SavedJobs=()=>{
             postTime: "2 days ago"
         }
     ];
-        let [jobss, setjobss] = useState(jobs);
     
+      let [marginleft, setmarginleft] = useState(false);
+        function sidebarspacefunc(spacesidebar) {
+            setmarginleft(spacesidebar);
+        }
+    const {Jobs}=useContext(JobContext);
+    const user= JSON.parse(localStorage.getItem('user'));
+  const savedjobs = user?.savedJobs || [];
+
     
+  const newsavedjobs=Jobs.filter(()=>{
+      return savedjobs.includes(Jobs._id);
+    });
+    let [jobss, setjobss] = useState(newsavedjobs);
+     
+    // function showsavedjob() {
+    //     console.log(savedjobs);
+    //     if (!Jobs||!savedjobs) {
+    //         return;
+    //     }
+        
+
+    // }
+
+    // useEffect(showsavedjob,[]);
+
+
+       
+
     return <>
+    
         <div className={`maincontent  mt-20 h-screen ${marginleft ? "md:ml-68" : "ml-20"}`}>
         <Sidebar colortext={"Saved Jobs"} sidebarspacefunc={sidebarspacefunc} />
         <div className="flex flex-col gap-4">
@@ -236,11 +262,11 @@ const SavedJobs=()=>{
 
             <div>
                 
-
-                <div className="grid gap-5   [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))] overflow-auto h-[88vh]">
+                {(jobss.length===0)?<h1 className="flex flex-center">There is no saved jobs </h1>:    <div className="grid gap-5   [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))] overflow-auto h-[88vh]">
                         {jobss.map((job) => <JobCard experience={job.experience} jobtype={job.type} companyname={job.companyName} role={job.role} location={job.location} salary={job.salary} skills={job.skills} posttime={job.postTime} />)}
-                     
-                </div>
+                </div>}
+
+            
             </div>
         </div>
     </div></>
