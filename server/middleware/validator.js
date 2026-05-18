@@ -23,7 +23,7 @@ export const validateJobs=[
   .isLength({min:30}).withMessage("description must be long "),
 
    body("jobType")
-    .isIn(["full-time", "part-time", "remote" ,"internship"])
+    .isIn(["Full-Time", "Part-Time", "Remote" ,"Internship","Contract"])
     .withMessage("Invalid job type"),
 
   body("salary")

@@ -63,6 +63,7 @@ export const viewapplicationsforJob=async (req,res)=>{
 //these is for uda status 
 export const updatestatus=async (req,res)=>{
     try {
+        console.log(req.body.status);
         const {id}=req.params;
         let resultone=await Application.findById(id);
         let jobid=resultone.jobid;
@@ -76,6 +77,7 @@ export const updatestatus=async (req,res)=>{
   { status: req.body.status },
   { new: true, runValidators: true }
 );
+
    if (result) {
     res.status(200).json({messege:result});
           }else{

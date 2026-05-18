@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Sidebar from "./component/Sidebar";
 import { SlCalender } from "react-icons/sl";
 import { IoIosHeartEmpty } from "react-icons/io";
@@ -7,6 +7,7 @@ import { IoMdCheckboxOutline } from "react-icons/io";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { CiLocationOn } from "react-icons/ci";
 import JobCard from "./component/Jobcard";
+import {JobContext} from "../../../../context/JobContext.jsx"
 
 
 
@@ -15,7 +16,31 @@ const RecruiterDashboard=()=>{
     function sidebarspacefunc(spacesidebar) {
         setmarginleft(spacesidebar);
     }
-    return <div className="conatiner pt-18 flex  ">
+
+    const [totlaapplicant,settotalapplicant]=useState(0);
+   
+     
+    
+    const {recruiterjobs,setRefresh,refresh,loading}=useContext(JobContext);
+
+    const [fetchedjobs,setfetchedjobs]=useState(recruiterjobs);
+  useEffect(()=>{
+      setTimeout(() => {
+          if(refresh==="i am in dashoardfirst"){
+                setfetchedjobs([])
+     console.log("yse state was updateing ");
+        setRefresh("i am in dashoardsecond");
+        setfetchedjobs(recruiterjobs);
+    }else{
+                setfetchedjobs([])
+     console.log("yse state was updateing second");
+        setRefresh("i am in dashoardfirst");
+        setfetchedjobs(recruiterjobs);
+    }
+    }, 0);
+  },[]);
+
+    return (loading)?(<div className="conatiner pt-18 flex  ">
         <Sidebar colortext={"Dashboard"} sidebarspacefunc={sidebarspacefunc} />
         <div className={`maincontent !no-scrollbar h-screen mr-4 ml-20 !overflow-y-auto ${marginleft ? "md:ml-69" : "ml-18"} sm:w-full md:ml-24`}>
 
@@ -32,7 +57,7 @@ const RecruiterDashboard=()=>{
                 <div className="flex max-h-[120px] min-w-3xs justify-between items-center border border shadow-sm rounded-xl h-40 px-4 md:min-w-[220px]">
                     <div className="flex flex-col  ">
                         <div className="text-xs">Total Job Posted</div>
-                        <div className="text-2xl font-bold">3</div>
+                        <div className="text-2xl font-bold">{recruiterjobs?recruiterjobs.length:0}</div>
                     </div>
                     <div className="text-3xl bg-[#DBEAFE] p-2 rounded-md"><IoMdCheckboxOutline /></div>
                 </div>
@@ -40,7 +65,7 @@ const RecruiterDashboard=()=>{
                 <div className="flex max-h-[120px]  min-w-3xs justify-between items-center border border shadow-sm rounded-xl h-40 px-4 md:min-w-[220px]">
                     <div className="flex flex-col  ">
                         <div className="text-xs">Total Applicants</div>
-                        <div className="text-2xl font-bold">347</div>
+                        <div className="text-2xl font-bold">{totlaapplicant}</div>
                     </div>
                     <div className="text-3xl bg-[#DBFCE7] p-2 rounded-md text-[#008236]"><FaShoppingBag /></div>
                 </div>
@@ -48,7 +73,7 @@ const RecruiterDashboard=()=>{
                 <div className="flex max-h-[120px]  min-w-3xs justify-between items-center border border shadow-sm rounded-xl h-40 px-4 md:min-w-[220px]">
                     <div className="flex flex-col  ">
                         <div className="text-xs">Active Postings</div>
-                        <div className="text-2xl font-bold">8</div>
+                        <div className="text-2xl font-bold">{recruiterjobs?recruiterjobs.filter(job => job.isOpen === true).length:<div>0</div>}</div>
                     </div>
                     <div className="text-3xl bg-[#FFE2E2] p-2 rounded-md text-[#C10007]"><IoIosHeartEmpty /></div>
                 </div>
@@ -66,18 +91,19 @@ const RecruiterDashboard=()=>{
 
 
 
-            <div className="flex flex-col gap-4 pt-5">
+            <div className="flex flex-col gap-4 pt-5 pb-5">
                 <div className="text-2xl font-bold flex  ">Recent Job Listings</div>
                 <div className="grid gap-5   [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
+                    {/* <JobCard/>
                     <JobCard/>
                     <JobCard/>
                     <JobCard/>
-                    <JobCard/>
-                    <JobCard/>
+                    <JobCard/> */}
+                    {fetchedjobs?fetchedjobs.map((job)=>{return <JobCard  settotalapplicant={settotalapplicant} job={job}/>}):<div>you havent post any job </div>}
                 </div>
             </div>
 
         </div>
-    </div>
+    </div>):<div>loading.....</div>
 }
 export default RecruiterDashboard;

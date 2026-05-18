@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Sidebar from "../dashboard/component/Sidebar";
 import JobCard from "./components/JobCard";
+import { JobContext } from "../../../../context/JobContext";
 
 
 const MyJobs=()=>{
@@ -8,8 +9,12 @@ const MyJobs=()=>{
     function sidebarspacefunc(spacesidebar) {
         setmarginleft(spacesidebar);
     }
+
+    const {recruiterjobs,setRefresh}=useContext(JobContext);
+    
+    
     return <div className="conatiner pt-18 flex ">
-        <Sidebar colortext={"Dashboard"} sidebarspacefunc={sidebarspacefunc} />
+        <Sidebar colortext={"My Jobs"} sidebarspacefunc={sidebarspacefunc} />
         <div className={`maincontent !no-scrollbar h-screen !w-full mr-4 ml-20 !overflow-y-auto ${marginleft ? "md:ml-69" : "ml-18"}  md:ml-24`}>
 
 
@@ -25,7 +30,7 @@ const MyJobs=()=>{
                 <div className="flex max-h-[120px] flex-center min-w-3xs  items-center flex-col border border shadow-sm rounded-xl h-40 px-4 md:min-w-[220px]">
                     
                         <div className="text-md">Total Jobs</div>
-                        <div className="text-4xl font-bold ">3</div>
+                        <div className="text-4xl font-bold ">{recruiterjobs?recruiterjobs.length:0}</div>
                     
                    
                 </div>
@@ -35,14 +40,14 @@ const MyJobs=()=>{
                 <div className="flex max-h-[120px]  min-w-3xs  flex-center flex-col border border shadow-sm rounded-xl h-40 px-4 md:min-w-[220px]">
                     
                         <div className="text-md">Active Postings</div>
-                        <div className="text-4xl font-bold">8</div>
+                        <div className="text-4xl font-bold">{recruiterjobs?recruiterjobs.filter(job => job.isOpen === true).length:<div>0</div>}</div>
                     
                 </div>
 
 
                    <div className="flex max-h-[120px]  min-w-3xs flex-center flex-col  border border shadow-sm rounded-xl h-40 px-4 md:min-w-[220px] ">
                         <div className="text-md">This Month Hires</div>
-                        <div className="text-4xl font-bold">105</div>
+                        <div className="text-4xl font-bold">0</div>
                 </div>
 
             </div>
@@ -52,9 +57,10 @@ const MyJobs=()=>{
             <div className="flex flex-col gap-4 pt-5">
                 <div className="text-2xl font-bold flex  ">Recent Job Listings</div>
                 <div className=" flex flex-col w-full gap-3 ">
+                  {/* <JobCard/>
                   <JobCard/>
-                  <JobCard/>
-                  <JobCard/>
+                  <JobCard/> */}
+                  {recruiterjobs?recruiterjobs.map((job)=>{return <JobCard job={job}/>}):<div>you havent post any job </div>}
 
                 </div>
             </div>

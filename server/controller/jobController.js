@@ -5,7 +5,7 @@ import mongoose from "mongoose"
 //this is for creating job
 export const createJob=async(req,res)=>{
     try{
-        
+        console.log(req.body);
     let errors=validationResult(req);
        if(!errors.isEmpty()){
        return res.status(400).json({errors:errors.array()});
@@ -18,6 +18,21 @@ export const createJob=async(req,res)=>{
     
     }catch(err){
         res.status(400).json({messege:err});
+    }
+}
+
+export const toggleJobStatus = async (req, res) => {
+    try {
+        const { id } = req.params
+        const job = await Job.findById(id)
+        if(!job) return res.status(404).json({ message: "Job not found" })
+        
+        job.isOpen = !job.isOpen
+        await job.save()
+        
+        res.status(200).json({ message: `Job ${job.isOpen ? "opened" : "closed"}`, job })
+    } catch(err) {
+        res.status(500).json({ message: err.message })
     }
 }
 
@@ -55,6 +70,7 @@ export  const  editJob=async (req,res)=>{
 export const myAllJobs=async (req,res)=>{
        try{
          const {_id}=req.user;
+         console.log(_id);
     const result=await Job.find({recruiterid: new mongoose.Types.ObjectId(_id)});
     console.log(result);
     console.log(req.user,"this wa the id ");

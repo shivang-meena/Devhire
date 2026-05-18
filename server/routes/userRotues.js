@@ -4,6 +4,7 @@ const route=Router();
 import {authMiddleware,roleMiddileware} from "../middleware/authMiddleware.js"
 
 import multer from "multer"
+import { getuserdetails } from "../controller/userController.js";
 import  {storagerofilepic,storageResume,cloudinary} from "../middleware/upload.js"
 const uploadprofile=multer({storage:storagerofilepic});
 const uploadresumeconfig=multer({storage:storageResume});
@@ -15,5 +16,6 @@ route.put("/upload-picture",authMiddleware,roleMiddileware("candidate"),uploadpr
 
 route.put("/upload-resume",authMiddleware,roleMiddileware("candidate"),uploadresumeconfig.single("resume"),uploadresume);
 
+route.get("/:id",authMiddleware,getuserdetails);
 
 export default route;

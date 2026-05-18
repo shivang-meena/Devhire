@@ -8,9 +8,9 @@ const RecruiterRegistration=()=>{
             name: "",
             email: "",
             password: "",
-            companyname: "",
-            descripton: "",
-           
+            companyName: "",
+            companyDescription: "",
+            
         });
     const [err, seterr] = useState("");
  async function handleregister(event) {
@@ -75,14 +75,14 @@ return <div className="loginpage min-h-screen w-full flex-center pt-30 pb-30 px-
                  <label htmlFor="" className="form-label">
                   Company Name
                 </label>
-                <input type="text"  onChange={(event) => {  setuserdata({ ...userdata, companyname: event.target.value }); seterr(""); }}   className="form-control" placeholder="Enter Company Name" />
+                <input type="text"  onChange={(event) => {  setuserdata({ ...userdata, companyName: event.target.value }); seterr(""); }}   className="form-control" placeholder="Enter Company Name" />
                </div>
 
                 <div className="emaillabelinput flex flex-col ">
                  <label htmlFor="" className="form-label">
                      Comapany Description
                 </label>
-                <textarea type="text"  onChange={(event) => {  setuserdata({ ...userdata, descripton: event.target.value }); seterr(""); }}   rows={5} className="form-control" placeholder="Description..." />
+                <textarea type="text"  onChange={(event) => {  setuserdata({ ...userdata, companyDescription: event.target.value }); seterr(""); }}   rows={5} className="form-control" placeholder="Description..." />
                </div>
 
                 <button className="btn btn-dark">Create Account</button>

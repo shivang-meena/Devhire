@@ -1,21 +1,27 @@
 import { Frown, LogIn } from "lucide-react";
-import { useState,useEffect,createContext } from "react";
+import { useState,useEffect,createContext, useContext } from "react";
 import {  useNavigate } from "react-router-dom";
+import { JobContext } from "./JobContext.jsx";
 
 
 export const AuthContext=createContext();
 
 export const AuthProvider=({children})=>{
+     
     const navigate=useNavigate();
     const [user,setuser]=useState(null);
-    const [loading,setloading]=useState(true);
+
+    const [loading,setloading]=useState(false);
     const [token,settoken]=useState("");
     const login=(userdetail,token)=>{
         setuser(userdetail);
+        settoken(token);
         localStorage.setItem('token',token);
         localStorage.setItem('user',JSON.stringify(userdetail));
-        settoken(token);
+        
+  
     }
+    
 
 
     
@@ -52,13 +58,13 @@ export const AuthProvider=({children})=>{
 
     const logout=()=>{
        navigate("/");
-        setTimeout(() => {
+        
              setuser(null);
         settoken(null);
         localStorage.removeItem('token');
         localStorage.removeItem('user');
               
-        }, 10);
+        ;
     }
     
     useEffect(()=>{

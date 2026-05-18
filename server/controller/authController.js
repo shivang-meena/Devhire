@@ -18,7 +18,9 @@ export const registration = async (req, res) => {
         return res.status(400).json({ errors: errors.array() })
     }
     try {
+        console.log(req.body);
         let newuser = new User(req.body);
+        console.log(newuser);
         let result = await newuser.save();
         console.log(result);
         res.status(201).json({ message: "User registered successfully" })

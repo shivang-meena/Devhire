@@ -17,7 +17,7 @@ let [email,setemail]=useState("shivang@example.com");
 
     return <>
         <div className={`maincontent  mt-20  h-screen ${marginleft ? "md:ml-65" : "ml-17"}`}>
-        <Sidebar colortext={"Company Profile"} sidebarspacefunc={sidebarspacefunc} />
+        <Sidebar colortext={"My Profile"} sidebarspacefunc={sidebarspacefunc} />
       
     
         <div className="flex flex-col pr-10 pl-7 overflow-auto h-[88vh] gap-8 pb-10">

@@ -13,7 +13,7 @@ let jobSchema=new Schema({
      location:String,
      jobType:{
         type:String,
-        enum: ["full-time", "part-time", "remote", "internship"] 
+        enum: ["Full-Time", "Part-Time", "Remote", "Internship","Contract"] 
      },
      salary:String,
      experience:String,

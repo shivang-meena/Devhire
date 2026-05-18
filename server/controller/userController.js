@@ -73,3 +73,18 @@ export const uploadresume=async(req,res)=>{
         }
 
 }
+
+
+export const getuserdetails=async (req,res)=>{
+  try {
+          const {id}=req.params;
+             const result=await User.findById(id);
+             if (result) {
+         res.status(200).json({messege:result});
+             }else{
+            res.status(400).json({messege:"ther is no user in you appp "});
+             }
+  } catch (error) {
+     res.status(400).json({messege:error+" ",user:null});
+  }
+}

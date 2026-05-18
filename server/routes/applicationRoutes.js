@@ -10,6 +10,7 @@ route.get("/my-applications",authMiddleware,roleMiddileware("candidate"),viewMya
 
 //this route for view all apllication fro specific job
 route.get("/job/:jobid",authMiddleware,roleMiddileware("recruiter"),viewapplicationsforJob);
+
 //this si for recuite updat 
 route.put("/status/:id",authMiddleware,roleMiddileware("recruiter"),updatestatus);
 //thes is for dlete 

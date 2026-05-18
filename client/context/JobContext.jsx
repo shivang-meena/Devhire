@@ -5,14 +5,18 @@ import { useContext } from "react";
 export const JobContext=createContext();
 
 export const JobProvider=({children})=>{
-         const {token,loading,setloading}=useContext(AuthContext);
+    const [refresh, setRefresh] = useState();
+         const {token,loading,setloading,user}=useContext(AuthContext);
          const [Jobs,setJobs]=useState();
+         const [recruiterjobs,setrecuiterjobs]=useState();
+         const [jobloading,setjobloading]=useState(false);
+        const currentToken = localStorage.getItem('token');
 
         const Jobsgetter= async ()=>{
             setloading(true);
            const res=await fetch("http://localhost:5000/Jobs/all",{
             headers:{
-                Authorization:`Bearer ${token}`
+                Authorization:`Bearer ${currentToken}`
             }
            });
            const jobdata=await res.json();
@@ -21,16 +25,81 @@ export const JobProvider=({children})=>{
 
             setloading(false);
         }
+ 
+        const recruiterjongetter=async ()=>{
+            try {
+           
+
+                const res=await fetch("http://localhost:5000/jobs/my-jobs",{
+                    method:"GET",
+                     headers:{
+                Authorization:`Bearer ${currentToken}`
+            }
+                });
+
+                const jobdata=await res.json();
+                console.log(jobdata);
+                setrecuiterjobs(jobdata.messege);
+              
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+
     useEffect(()=>{
-    if (!token) {
+        // ✅ read directly from localStorage — always has latest value
+       
+        const currentUser = JSON.parse(localStorage.getItem('user'));
+         setloading(false);
+          console.log(currentToken);
+        console.log(currentToken);
+         setJobs([]);
+    setrecuiterjobs([]);
+
+
+    if (!currentToken||!currentUser?._id) {
         return;
-    }    
-        Jobsgetter()
-    
-    },[token]);
+    }
+
+     if (user?.role==="candidate") {
+         Jobsgetter();
+     }else if (user?.role==="recruiter") {
+      recruiterjongetter();  
+     }  
+     setRefresh("done"); 
+      setloading(true);
+    },[refresh]);
+
+    useEffect(()=>{
+          setloading(false);
+        
+                  // ✅ read directly from localStorage — always has latest value
+        const currentToken = localStorage.getItem('token');
+        const currentUser = JSON.parse(localStorage.getItem('user'));
+         setloading(false);
+          console.log(currentToken);
+        console.log(currentToken);
+         setJobs([]);
+    setrecuiterjobs([]);
 
 
-    return (<JobContext.Provider value={{Jobs}}>
+    if (!currentToken||!currentUser?._id) {
+        return;
+    }
+
+          
+     if (user?.role==="candidate") {
+         Jobsgetter();
+     }else if (user?.role==="recruiter") {
+        console.log(user?._id);
+      recruiterjongetter();  
+     }
+     setloading(true);
+    },[token,user?._id,refresh]);
+
+
+    return (<JobContext.Provider value={{Jobs,recruiterjobs,setRefresh,refresh,loading}}>
         {children}
  </JobContext.Provider>);
 }

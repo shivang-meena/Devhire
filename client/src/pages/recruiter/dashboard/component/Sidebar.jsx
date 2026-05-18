@@ -25,56 +25,56 @@ const Sidebar = ({sidebarspacefunc,colortext}) => {
             <div className={`flex justify-start  gap-2 ${color==="Dashboard"&&"bg-[#0E5794]"} h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
                    
-                     <Link to="" className="text-white !no-underline"> <RiDashboardLine /> </Link>
+                     <Link to="/recruiter/dashboard" className="text-white !no-underline"> <RiDashboardLine /> </Link>
                     
                 </div>
                 {full&&<div className="text font-semibold text-md">
                    
-                     <Link to="" className="text-white !no-underline">  Dashboard</Link>
+                     <Link to="/recruiter/dashboard" className="text-white !no-underline">  Dashboard</Link>
                     
                 </div>}
                 
             </div>
 
 
-            <div className={`flex justify-start  gap-2 ${color==="Browse Jobs"&&"bg-[#0E5794]"} h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
+            <div className={`flex justify-start  gap-2 ${color==="postjob"&&"bg-[#0E5794]"} h-9 rounded-lg items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
           
                 <div className="icon text-2xl">
                     
-                     <Link to="" className="text-white !no-underline text-3xl "><IoAdd/></Link>
+                     <Link to="/postjob" className="text-white !no-underline text-3xl "><IoAdd/></Link>
                     
                 </div>
                {full&&<div className="text font-semibold text-md">
                    
-                     <Link to="" className="text-white !no-underline">Post Job</Link>
+                     <Link to="/postjob" className="text-white !no-underline">Post Job</Link>
                     
                 </div>}
             
             </div>
 
-     <div className={`flex justify-start  gap-2 h-9 rounded-lg  ${color==="My Applications"&&"bg-[#0E5794]"} items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
+     <div className={`flex justify-start  gap-2 h-9 rounded-lg  ${color==="My Jobs"&&"bg-[#0E5794]"} items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
                    
-                     <Link to="" className="text-white !no-underline"> < FaShoppingBag/></Link>
+                     <Link to="/jobsposted" className="text-white !no-underline"> < FaShoppingBag/></Link>
 
                 </div>
                 {full&&<div className="text font-semibold text-md">
-                     <Link to="" className="text-white !no-underline">My Jobs</Link>
+                     <Link to="/jobsposted" className="text-white !no-underline">My Jobs</Link>
                 </div>}
             </div>
 
-            <div className={`flex justify-start  gap-2 h-9 rounded-lg  ${color==="My Applications"&&"bg-[#0E5794]"} items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
+            {/* <div className={`flex justify-start  gap-2 h-9 rounded-lg  ${color==="My Applications"&&"bg-[#0E5794]"} items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
                    
-                     <Link to="" className="text-white !no-underline"> <BsFileEarmarkText /></Link>
+                     <Link to="/applicants" className="text-white !no-underline"> <BsFileEarmarkText /></Link>
 
                 </div>
                 {full&&<div className="text font-semibold text-md">
-                     <Link to="" className="text-white !no-underline">My Applications</Link>
+                     <Link to="/applicants" className="text-white !no-underline">My Applications</Link>
                 </div>}
-            </div>
+            </div> */}
 
-
+{/* 
             <div   className={`flex justify-start  gap-2 h-9 rounded-lg  ${color==="Saved Jobs"&&"bg-[#0E5794]"} items-center ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
                    
@@ -86,18 +86,18 @@ const Sidebar = ({sidebarspacefunc,colortext}) => {
                      <Link to="" className="text-white !no-underline">Candidates</Link>
                     
                 </div>}
-            </div>
+            </div> */}
 
 
             <div className={`flex justify-start  gap-2 h-9 rounded-lg items-center  ${color==="My Profile"&&"bg-[#0E5794]"} ${!full?"w-11 flex-center":" w-full pl-2 "}`}>
                 <div className="icon text-2xl">
                  
-                     <Link to="" className="text-white !no-underline">    <GoPerson /></Link>
+                     <Link to="/recruiter-profile" className="text-white !no-underline">    <GoPerson /></Link>
 
                 </div>
               {full&&<div className="text font-semibold text-md">
                    
-                     <Link to="" className="text-white !no-underline"> Company Profile</Link>
+                     <Link to="/recruiter-profile" className="text-white !no-underline"> Company Profile</Link>
 
                 </div>}
             </div>

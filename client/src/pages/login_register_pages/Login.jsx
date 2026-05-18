@@ -1,14 +1,17 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { JobContext } from "../../../context/JobContext";
+
 
 const Login = () => {
     const navigate=useNavigate();
     const {login}=useContext(AuthContext);
-
     let [email,setemail]=useState("");
     let [password,setpassword]=useState("");
     let [errormsg,seterrmsg]=useState("");
+
+    // const { Jobsgetter, recruiterjongetter } = useContext(JobContext);
 
 async function handlesubmit(event){
       event.preventDefault()
@@ -26,8 +29,13 @@ async function handlesubmit(event){
 
       console.log(checkuser);
       login(checkuser,token);
+        //    if (checkuser.role==="recruiter") {
+        //     recruiterjongetter(token);
+        //    }else if (checkuser.role==="candidate") {
+        //     Jobsgetter(token);
+        //    }
       if(checkuser.role==="recruiter"){
-          navigate("/recruiter/dashboard");
+          navigate("/recruiter/jobsposted");
       }else if(checkuser.role==="candidate"){
                navigate("/candidate/dashboard");
       }else if(checkuser.role==="admin"){

@@ -6,7 +6,7 @@ export const ApplicationContext=createContext();
 
 export const ApplicationProvider=({children})=>{
    let [applications,setapplications]=useState();
-    const {token}=useContext(AuthContext);
+    const {token,user}=useContext(AuthContext);
    async function fetchapplications() {
           const res=await fetch("http://localhost:5000/applications/my-applications",{
            headers:{
@@ -24,7 +24,9 @@ export const ApplicationProvider=({children})=>{
          console.log("thre is no tokn jherer ");
          return;
       }
-      fetchapplications();
+      if(user.role==="candidate"){
+         fetchapplications();
+      }
    },[token]);
           return (<ApplicationContext.Provider value={{applications}}>
              {children}

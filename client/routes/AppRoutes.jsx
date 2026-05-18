@@ -23,6 +23,7 @@ import JobDetails from "../src/pages/candidate/Jobdetail/JobDetails.jsx"
 import { useContext } from "react"
 import { AuthContext } from "../context/AuthContext.jsx"
 import { Navigate } from "react-router-dom"
+import Editjobs from "../src/pages/recruiter/myjobs/components/Editjobs.jsx"
 const AppRoutes=()=>{
     
     const {user,loading}=useContext(AuthContext);
@@ -106,6 +107,11 @@ const AppRoutes=()=>{
         <Route path="/recruiter-profile" element={
             <ProtectedRoutes role={"recruiter"}>
                 <Profile/>
+            </ProtectedRoutes>
+            }/>
+             <Route path="/recruiter-editjob/:jobid" element={
+            <ProtectedRoutes role={"recruiter"}>
+                <Editjobs/>
             </ProtectedRoutes>
             }/>
 
