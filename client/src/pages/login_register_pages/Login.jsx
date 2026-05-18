@@ -11,7 +11,7 @@ const Login = () => {
     let [password,setpassword]=useState("");
     let [errormsg,seterrmsg]=useState("");
 
-    // const { Jobsgetter, recruiterjongetter } = useContext(JobContext);
+    const { Jobsgetter, recruiterjongetter } = useContext(JobContext);
 
 async function handlesubmit(event){
       event.preventDefault()
@@ -29,13 +29,13 @@ async function handlesubmit(event){
 
       console.log(checkuser);
       login(checkuser,token);
-        //    if (checkuser.role==="recruiter") {
-        //     recruiterjongetter(token);
-        //    }else if (checkuser.role==="candidate") {
-        //     Jobsgetter(token);
-        //    }
+           if (checkuser.role==="recruiter") {
+            recruiterjongetter(token);
+           }else if (checkuser.role==="candidate") {
+            Jobsgetter(token);
+           }
       if(checkuser.role==="recruiter"){
-          navigate("/recruiter/jobsposted");
+          navigate("/recruiter/dashboard");
       }else if(checkuser.role==="candidate"){
                navigate("/candidate/dashboard");
       }else if(checkuser.role==="admin"){

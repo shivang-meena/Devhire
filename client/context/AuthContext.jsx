@@ -1,7 +1,7 @@
 import { Frown, LogIn } from "lucide-react";
 import { useState,useEffect,createContext, useContext } from "react";
 import {  useNavigate } from "react-router-dom";
-import { JobContext } from "./JobContext.jsx";
+
 
 
 export const AuthContext=createContext();

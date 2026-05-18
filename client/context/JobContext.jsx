@@ -12,11 +12,11 @@ export const JobProvider=({children})=>{
          const [jobloading,setjobloading]=useState(false);
         const currentToken = localStorage.getItem('token');
 
-        const Jobsgetter= async ()=>{
+        const Jobsgetter= async (newtoken)=>{
             setloading(true);
            const res=await fetch("http://localhost:5000/Jobs/all",{
             headers:{
-                Authorization:`Bearer ${currentToken}`
+                Authorization:`Bearer ${newtoken||currentToken}`
             }
            });
            const jobdata=await res.json();
@@ -26,14 +26,14 @@ export const JobProvider=({children})=>{
             setloading(false);
         }
  
-        const recruiterjongetter=async ()=>{
+        const recruiterjongetter=async (newtoken)=>{
             try {
            
 
                 const res=await fetch("http://localhost:5000/jobs/my-jobs",{
                     method:"GET",
                      headers:{
-                Authorization:`Bearer ${currentToken}`
+                Authorization:`Bearer ${newtoken||currentToken}`
             }
                 });
 
@@ -99,7 +99,7 @@ export const JobProvider=({children})=>{
     },[token,user?._id,refresh]);
 
 
-    return (<JobContext.Provider value={{Jobs,recruiterjobs,setRefresh,refresh,loading}}>
+    return (<JobContext.Provider value={{recruiterjongetter,Jobsgetter,Jobs,recruiterjobs,setRefresh,refresh,loading}}>
         {children}
  </JobContext.Provider>);
 }

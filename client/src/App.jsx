@@ -5,6 +5,8 @@ import Fotter from "./components/Fotter.jsx"
 import AppRoutes from "../routes/AppRoutes.jsx"
 import { useState } from "react"
 import JobDetails from "./pages/candidate/Jobdetail/JobDetails.jsx"
+import { JobProvider } from "../context/JobContext.jsx"
+import { ApplicationProvider } from "../context/ApplicationContext.jsx"
 function App() {
    
   return (<> 
@@ -12,11 +14,15 @@ function App() {
 
 
     <AuthProvider>
+      <JobProvider>
+        <ApplicationProvider>
       <Navbar></Navbar>
  <main>
  <AppRoutes></AppRoutes>
  </main>
     <Fotter className="z-50" ></Fotter>
+    </ApplicationProvider>
+    </JobProvider>
        </AuthProvider>
 
 

@@ -40,7 +40,7 @@ const RecruiterDashboard=()=>{
     }, 0);
   },[]);
 
-    return (loading)?(<div className="conatiner pt-18 flex  ">
+    return (<div className="conatiner pt-18 flex  ">
         <Sidebar colortext={"Dashboard"} sidebarspacefunc={sidebarspacefunc} />
         <div className={`maincontent !no-scrollbar h-screen mr-4 ml-20 !overflow-y-auto ${marginleft ? "md:ml-69" : "ml-18"} sm:w-full md:ml-24`}>
 
@@ -104,6 +104,6 @@ const RecruiterDashboard=()=>{
             </div>
 
         </div>
-    </div>):<div>loading.....</div>
+    </div>)
 }
 export default RecruiterDashboard;
