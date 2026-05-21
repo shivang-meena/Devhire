@@ -24,7 +24,11 @@ export const createJob=async(req,res)=>{
 export const toggleJobStatus = async (req, res) => {
     try {
         const { id } = req.params
-        const job = await Job.findById(id)
+        const {_id}=req.user;
+        const job = await Job.findOne({
+    _id: id,
+    recruiterid: new mongoose.Types.ObjectId(_id)
+});
         if(!job) return res.status(404).json({ message: "Job not found" })
         
         job.isOpen = !job.isOpen
@@ -40,8 +44,13 @@ export const toggleJobStatus = async (req, res) => {
 export const deleteJob=async (req,res)=>{
    try{
     const {id}=req.params;
+     const {_id}=req.user;
    console.log(id);
-   let result=await Job.findByIdAndDelete(id);
+//    let result=await Job.findByIdAndDelete(id);
+let result = await Job.findOneAndDelete({
+    _id: id,
+    recruiterid: new mongoose.Types.ObjectId(_id)
+});
    if(result){
      res.status(200).json({messege:result}); 
    }else{
@@ -57,7 +66,15 @@ export const deleteJob=async (req,res)=>{
 export  const  editJob=async (req,res)=>{
          try{
             const {id}=req.params
-         let result=await Job.findByIdAndUpdate(id,req.body,{new:true});
+     const {_id}=req.user;
+         let result=await  Job.findOneAndUpdate(
+    {
+        _id: id,
+        recruiterid: new mongoose.Types.ObjectId(_id)
+    },
+    req.body,
+    { new: true }
+);
          console.log(result);
      res.status(200).json({messege:result}); 
          }catch(err){

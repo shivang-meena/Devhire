@@ -2,7 +2,7 @@ import {Routes,Route} from "react-router-dom"
 import LandingPage  from "../src/pages/public/landingpage/Landing.jsx"
 import Login from "../src/pages/login_register_pages/Login.jsx"
 import RecruiterRegistration from "../src/pages/login_register_pages/RecruterRegistration.jsx"
-import CandidateRegistration from "../src/pages/login_register_pages/CandidateRegistration.jsx"
+import CandidateRegistration from "../src/pages/login_register_pages/candidateregisteration/CandidateRegistration.jsx"
 import RoleChoose from "../src/pages/login_register_pages/RoleChoose.jsx"
 import UserDashboard from  "../src/pages/candidate/candidateDashboard/UserDashboard.jsx"
 import JobBrowse from "../src/pages/candidate/Browsejob/JobBrowse.jsx"
@@ -54,6 +54,7 @@ const AppRoutes=()=>{
                 <UserDashboard />
             </ProtectedRoutes>
             }/>
+
         <Route path="/candidate/browsejobs" element={
             <ProtectedRoutes role={"candidate"}>
                 <JobBrowse/>
@@ -118,9 +119,24 @@ const AppRoutes=()=>{
 
 
 
-        <Route path="/admin/dashboard" element={<Admindashboard/>} />
-        <Route path="/manageusers" element={<ManageUsers/>}/>
-        <Route path="/managejobs" element={<Managejobs/>} />
+        <Route path="/admin/dashboard" element={
+            <ProtectedRoutes role={"admin"} >
+                 <Admindashboard/>
+             </ProtectedRoutes>
+            } />
+
+        <Route path="/manageusers" element={
+            <ProtectedRoutes role={"admin"}>
+
+                <ManageUsers/>
+            </ProtectedRoutes>
+            }/>
+
+        <Route path="/managejobs" element={
+            <ProtectedRoutes role={"admin"}>
+                <Managejobs/>
+            </ProtectedRoutes>
+            } />
         <Route path="*" element={<div className="pt-30">Page Not Found lorem*30</div>} />
     </Routes>
 }

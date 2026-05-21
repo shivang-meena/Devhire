@@ -95,12 +95,15 @@ const MyApplications = () => {
 const {applications}=useContext(ApplicationContext);
 
 
-let [Applicationsdata,setapplicationsdata]=useState(applications);
+let [Applicationsdata,setapplicationsdata]=useState(applications||[]);
 let [clicked,setclicked]=useState("All");
 
 
 
 function filterapplications(type) {
+    if (!applications) {
+        return;
+    }
     if (type === "All") {
         setapplicationsdata(applications);
     } else {

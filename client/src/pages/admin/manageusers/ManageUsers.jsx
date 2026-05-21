@@ -11,9 +11,11 @@ import { GiGraduateCap } from "react-icons/gi";
 
 
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Sidebar from "../component/sidebar/Sidebar.jsx";
-const ManageUsers= () => {
+import { JobContext } from "../../../../context/JobContext.jsx";
+import { AuthContext } from "../../../../context/AuthContext.jsx";
+const ManageUsers = () => {
 
     let [marginleft, setmarginleft] = useState(false);
     function sidebarspacefunc(spacesidebar) {
@@ -21,46 +23,107 @@ const ManageUsers= () => {
     }
 
 
-    const usersdata = [
-        {
-            name: "John Doe",
-            email: "john@example.com",
-            role: "Candidate",
-            joinedDate: "2024-01-15"
-        },
-        {
-            name: "Jane Smith",
-            email: "jane@example.com",
-            role: "Admin",
-            joinedDate: "2023-11-10"
-        },
-        {
-            name: "Rahul Sharma",
-            email: "rahul@example.com",
-            role: "candidate",
-            joinedDate: "2024-02-01"
-        },
-        {
-            name: "Priya Verma",
-            email: "priya@example.com",
-            role: "Candidate",
-            joinedDate: "2024-03-05"
-        },
-        {
-            name: "Amit Kumar",
-            email: "amit@example.com",
-            role: "Manager",
-            joinedDate: "2023-12-20"
+    // const usersdata = [
+    //     {
+    //         name: "John Doe",
+    //         email: "john@example.com",
+    //         role: "Candidate",
+    //         joinedDate: "2024-01-15"
+    //     },
+    //     {
+    //         name: "Jane Smith",
+    //         email: "jane@example.com",
+    //         role: "Admin",
+    //         joinedDate: "2023-11-10"
+    //     },
+    //     {
+    //         name: "Rahul Sharma",
+    //         email: "rahul@example.com",
+    //         role: "candidate",
+    //         joinedDate: "2024-02-01"
+    //     },
+    //     {
+    //         name: "Priya Verma",
+    //         email: "priya@example.com",
+    //         role: "Candidate",
+    //         joinedDate: "2024-03-05"
+    //     },
+    //     {
+    //         name: "Amit Kumar",
+    //         email: "amit@example.com",
+    //         role: "Manager",
+    //         joinedDate: "2023-12-20"
+    //     }
+    // ];
+
+    const { adminrecentusers:users,adminrefresh,setadminrefresh,setadminrecentusers } = useContext(JobContext);
+    // /block/:id
+
+
+
+    // const [users, setusers] = useState(adminrecentusers);
+    const { token ,user} = useContext(AuthContext);
+
+    const formatdate = (dateparam) => {
+        const date = new Date(dateparam);
+        const formattedDate =
+            `${date.getDate().toString().padStart(2, "0")}-
+${(date.getMonth() + 1).toString().padStart(2, "0")}-
+${date.getFullYear()}`;
+        return formattedDate;
+    }
+
+    async function toggleuser(id) {
+        try {
+
+            const res = await fetch(`http://localhost:5000/admin/block/${id}`, {
+                method:"PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            const result = await res.json();
+            // setadminrefresh(prev=>prev+1);
+            setadminrecentusers(prev =>
+                prev.map(u => u._id === id ? { ...u, isBlocked: !u.isBlocked } : u)
+            );
+           
+            console.log(result);
+        } catch (error) {
+            console.log(error);
         }
-    ];
+    }
 
 
-  
-    const [users, setusers] = useState(usersdata);
+    
+    async function deleteuser(id) {
+        try {
+
+            const res = await fetch(`http://localhost:5000/admin/delete/${id}`, {
+                method:"DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            const result = await res.json();
+            // setadminrefresh(prev=>prev+1);
+            setadminrecentusers(prev =>
+                prev.filter(u =>(u._id !== id))
+            );
+           
+            console.log(result);
+            console.log("usr was deleted");
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
 
     return <div className="conatiner pt-18 flex  ">
-        <Sidebar colortext={"Dashboard"} sidebarspacefunc={sidebarspacefunc} />
+        <Sidebar colortext={"manage-users"} sidebarspacefunc={sidebarspacefunc} />
         <div className={`maincontent !no-scrollbar h-screen mr-4 ml-20 !overflow-y-auto ${marginleft ? "md:ml-69" : "ml-18"} sm:w-full md:ml-24`}>
 
 
@@ -70,52 +133,52 @@ const ManageUsers= () => {
             </div>
 
 
-          <div>
-              <div></div>
-          </div>
+            <div>
+                <div></div>
+            </div>
 
 
             <div className="flex flex-col gap-4 pt-5 ">
                 <div className="text-2xl font-bold flex">Users</div>
 
-              
-                    <div className="flex flex-col shadow-md border-1 border-gray-200 rounded-md gap-2 p-3 w-full" >
-                        <div className="text-xl font-bold">
-                            Recent Users
-                        </div>
 
-                        <div  className="overflow-scroll w-full">
-                            <table className="w-full border-collapse text-md">
-                                <thead>
-                                    <tr className="!border-b !border-gray-200">
-                                        <th className="p-3 px-3 text-left border-b-2 border-gray-300">Name</th>
-                                        <th className="p-3 px-3 text-left border-b-2 border-gray-300">Email</th>
-                                        <th className="p-3 px-3 text-left border-b-2 border-gray-300">Role</th>
-                                        <th className="p-3 px-3 text-left border-b-2 border-gray-300">Joined</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    {users.map((user) => {
-                                        return <tr className="!border-b !border-gray-200">
-
-                                            <td className="p-3 px-3 text-left ">{user.name}</td>
-                                            <td className="p-3 px-3 text-left ">{user.email}</td>
-                                            <td className="p-3 px-3 text-left   "><div className="p-1 h-5 flex-center rounded-md w-18 bg-green-300">{user.role}</div></td>
-                                            <td className="p-3 px-3 text-left ">{user.joinedDate}</td>
-                                            <td className="flex h-full  gap-2 p-3 px-3 text-left ">
-                                                <div  className="bg-green-300 rounded-md p-2" ><button>UnBlock</button></div> 
-                                                <div  className=" bg-red-400 rounded-md p-2" ><button >Delete</button></div>
-                                                
-                                                </td>
-                                        </tr>
-                                    })}
-                                </tbody>
-                            </table>
-                        </div>
+                <div className="flex flex-col shadow-md border-1 border-gray-200 rounded-md gap-2 p-3 w-full" >
+                    <div className="text-xl font-bold">
+                        Recent Users
                     </div>
 
-                
+                    <div className="overflow-scroll w-full">
+                        <table className="w-full border-collapse text-md">
+                            <thead>
+                                <tr className="!border-b !border-gray-200">
+                                    <th className="p-3 px-3 text-left border-b-2 border-gray-300">Name</th>
+                                    <th className="p-3 px-3 text-left border-b-2 border-gray-300">Email</th>
+                                    <th className="p-3 px-3 text-left border-b-2 border-gray-300">Role</th>
+                                    <th className="p-3 px-3 text-left border-b-2 border-gray-300">Joined</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {users.map((user) => {
+                                    return <tr className="!border-b !border-gray-200">
+
+                                        <td className="p-3 px-3 text-left ">{user?.name}</td>
+                                        <td className="p-3 px-3 text-left ">{user?.email}</td>
+                                        <td className="p-3 px-3 text-left   "><div className="p-1 h-5 flex-center rounded-md w-18 bg-green-300">{user?.role}</div></td>
+                                        <td className="p-3 px-3 text-left ">{formatdate(user?.createdAt)}</td>
+                                        <td className="flex h-full  gap-2 p-3 px-3 text-left ">
+                                            <div className={`bg-green-300 rounded-md p-2 ${(user?.isBlocked)?'bg-green-300':'bg-red-300'} `} onClick={()=>{toggleuser(user._id)}} ><button>{(user?.isBlocked)?<div>Unblock</div>:<div>block</div>}</button></div>
+                                            <div className=" bg-red-400 rounded-md p-2" onClick={()=>{deleteuser(user._id)}} ><button >Delete</button></div>
+
+                                        </td>
+                                    </tr>
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
 
                 {/* <div className="grid gap-5   [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
                  

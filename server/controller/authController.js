@@ -22,16 +22,19 @@ export const registration = async (req, res) => {
         let newuser = new User(req.body);
         console.log(newuser);
         let result = await newuser.save();
-        console.log(result);
+        console.log(result+" this i ia m in registeration ");
+        console.log("user was regestered");
         res.status(201).json({ message: "User registered successfully" })
     } catch (err) {
         console.log(req.body);
+        console.log(err);
         if (err.code === 11000) {
-            return res.status(400).json({ message: "Email already exists" })
+            return res.status(400).json({ message:" Email already exists" })
         }
         res.status(500).json({ message: err.message })
     }
 }
+
 
 //this was the login system and  
 export const login = async (req, res) => {

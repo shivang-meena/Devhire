@@ -6,14 +6,19 @@ export const JobContext=createContext();
 
 export const JobProvider=({children})=>{
     const [refresh, setRefresh] = useState();
-         const {token,loading,setloading,user}=useContext(AuthContext);
+         const {token,user}=useContext(AuthContext);
          const [Jobs,setJobs]=useState();
          const [recruiterjobs,setrecuiterjobs]=useState();
          const [jobloading,setjobloading]=useState(false);
         const currentToken = localStorage.getItem('token');
 
+        const [adminrecentjobs,setadminrecentjobs]=useState([]);
+        const [adminrecentusers,setadminrecentusers]=useState([]);
+        const [adminrefresh,setadminrefresh]=useState(0);
+
         const Jobsgetter= async (newtoken)=>{
-            setloading(true);
+            setjobloading(true);
+            
            const res=await fetch("http://localhost:5000/Jobs/all",{
             headers:{
                 Authorization:`Bearer ${newtoken||currentToken}`
@@ -23,7 +28,7 @@ export const JobProvider=({children})=>{
             console.log(jobdata);
             setJobs(jobdata.jobs);
 
-            setloading(false);
+            setjobloading(false);
         }
  
         const recruiterjongetter=async (newtoken)=>{
@@ -47,13 +52,14 @@ export const JobProvider=({children})=>{
         }
 
 
+
     useEffect(()=>{
         // ✅ read directly from localStorage — always has latest value
        
         const currentUser = JSON.parse(localStorage.getItem('user'));
-         setloading(false);
-          console.log(currentToken);
-        console.log(currentToken);
+       
+        //   console.log(currentToken);
+        // console.log(currentToken);
          setJobs([]);
     setrecuiterjobs([]);
 
@@ -68,18 +74,18 @@ export const JobProvider=({children})=>{
       recruiterjongetter();  
      }  
      setRefresh("done"); 
-      setloading(true);
+      setjobloading(false);
     },[refresh]);
 
     useEffect(()=>{
-          setloading(false);
         
-                  // ✅ read directly from localStorage — always has latest value
+        // ✅ read directly from localStorage — always has latest value
         const currentToken = localStorage.getItem('token');
         const currentUser = JSON.parse(localStorage.getItem('user'));
-         setloading(false);
-          console.log(currentToken);
-        console.log(currentToken);
+    
+        //   console.log(currentToken);
+    
+        // console.log(currentToken);
          setJobs([]);
     setrecuiterjobs([]);
 
@@ -92,14 +98,14 @@ export const JobProvider=({children})=>{
      if (user?.role==="candidate") {
          Jobsgetter();
      }else if (user?.role==="recruiter") {
-        console.log(user?._id);
+        // console.log(user?._id);
       recruiterjongetter();  
      }
-     setloading(true);
+     setjobloading(true);
     },[token,user?._id,refresh]);
 
 
-    return (<JobContext.Provider value={{recruiterjongetter,Jobsgetter,Jobs,recruiterjobs,setRefresh,refresh,loading}}>
+    return (<JobContext.Provider value={{adminrefresh,setadminrefresh,adminrecentusers,setadminrecentusers,adminrecentjobs,setadminrecentjobs,recruiterjongetter,Jobsgetter,Jobs,recruiterjobs,setRefresh,refresh,jobloading,setjobloading}}>
         {children}
  </JobContext.Provider>);
 }

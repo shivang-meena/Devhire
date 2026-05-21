@@ -6,7 +6,7 @@ export const ApplicationContext=createContext();
 
 export const ApplicationProvider=({children})=>{
    let [applications,setapplications]=useState();
-    const {token,user}=useContext(AuthContext);
+   const {token,user}=useContext(AuthContext);
    async function fetchapplications() {
           const res=await fetch("http://localhost:5000/applications/my-applications",{
            headers:{

@@ -155,7 +155,7 @@ let [image,setimage]=useState(null);
 
 
                     <div className="flex flex-col md:flex-row px-4 py-9 pt-12 items-center shadow-md border-1 border-[#E2E5E8] rounded-lg gap-5">
-                        <div><img className="h-32 w-32 rounded-full" src={`${user.profilepicture.url}`} alt="" />
+                        <div><img className="h-32 w-32 rounded-full" src={`${user?.profilepicture?.url}`} alt="" />
 
                         </div>
                         <div className="w-full">
@@ -243,6 +243,7 @@ let [image,setimage]=useState(null);
 
 
                     </div>
+
                         <div className="shadow-md border-1 border-[#E2E5E8] rounded-lg flex flex-center flex-col gap-2 mt-3 p-3 gap-3">
                             <div>Resume</div>
                             {user.resume?user.resume.name:<div>There is no resume upload from sidbar</div>}

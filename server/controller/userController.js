@@ -79,6 +79,7 @@ export const getuserdetails=async (req,res)=>{
   try {
           const {id}=req.params;
              const result=await User.findById(id);
+             
              if (result) {
          res.status(200).json({messege:result});
              }else{

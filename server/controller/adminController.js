@@ -21,7 +21,7 @@ export const viewallusers= async(req,res)=>{
 }
 
 
-//this is for block or unblock the use r
+//this is for block or unblock the user
 export const blockandunblock=async (req,res)=>{
      try {
              const {id}=req.params;
@@ -32,9 +32,8 @@ export const blockandunblock=async (req,res)=>{
           }else{
               user.isBlocked = !user.isBlocked;
               await user.save();
-        let result = (user.isBlocked) ? "blocked" : "unbloeckd";
-     res.status(200).json({messege:`user was ${result}`});
-                
+        let result = (user.isBlocked) ? "blocked" : "unblocked";
+     res.status(200).json({messege:`user was ${result}`});   
           }
          } catch (err) {
             console.log(err);
@@ -107,4 +106,24 @@ export const statsall=async (req,res)=>{
      } catch (err) {
              res.status(400).json({messege:err});
      }
+}
+
+
+
+export const toggleJobStatus = async (req, res) => {
+    try {
+        const { id } = req.params
+     //    const {_id}=req.user;
+        const job = await Job.findOne({
+    _id: id
+});
+        if(!job) return res.status(404).json({ message: "Job not found" })
+        
+        job.isOpen = !job.isOpen
+        await job.save()
+        
+        res.status(200).json({ message: `Job ${job.isOpen ? "opened" : "closed"}`, job })
+    } catch(err) {
+        res.status(500).json({ message: err.message })
+    }
 }

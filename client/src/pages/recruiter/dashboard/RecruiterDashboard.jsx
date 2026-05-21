@@ -8,6 +8,7 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import { CiLocationOn } from "react-icons/ci";
 import JobCard from "./component/Jobcard";
 import {JobContext} from "../../../../context/JobContext.jsx"
+import { AuthContext } from "../../../../context/AuthContext.jsx";
 
 
 
@@ -21,26 +22,39 @@ const RecruiterDashboard=()=>{
    
      
     
-    const {recruiterjobs,setRefresh,refresh,loading}=useContext(JobContext);
+    // const {recruiterjobs,setRefresh,refresh,jobloading,setjobloading}=useContext(JobContext);
+   const [jobloading,setjobloading]=useState(false);
+    const [fetchedjobs,setfetchedjobs]=useState([]);
+      const {token}=useContext(AuthContext);
 
-    const [fetchedjobs,setfetchedjobs]=useState(recruiterjobs);
-  useEffect(()=>{
-      setTimeout(() => {
-          if(refresh==="i am in dashoardfirst"){
-                setfetchedjobs([])
-     console.log("yse state was updateing ");
-        setRefresh("i am in dashoardsecond");
-        setfetchedjobs(recruiterjobs);
-    }else{
-                setfetchedjobs([])
-     console.log("yse state was updateing second");
-        setRefresh("i am in dashoardfirst");
-        setfetchedjobs(recruiterjobs);
-    }
-    }, 0);
-  },[]);
+const recruiterjongetter=async ()=>{
+            try {
+           
 
-    return (<div className="conatiner pt-18 flex  ">
+                const res=await fetch("http://localhost:5000/jobs/my-jobs",{
+                    method:"GET",
+                     headers:{
+                Authorization:`Bearer ${token||localStorage.getItem("token")}`
+            }
+                });
+
+                const jobdata=await res.json();
+                console.log(jobdata);
+             setfetchedjobs(jobdata.messege);
+              
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+
+        useEffect(()=>{
+            setjobloading(true);
+       recruiterjongetter();
+       setjobloading(false);
+        },[]);
+
+    return (!jobloading)?(<div className="conatiner pt-18 flex  ">
         <Sidebar colortext={"Dashboard"} sidebarspacefunc={sidebarspacefunc} />
         <div className={`maincontent !no-scrollbar h-screen mr-4 ml-20 !overflow-y-auto ${marginleft ? "md:ml-69" : "ml-18"} sm:w-full md:ml-24`}>
 
@@ -57,7 +71,7 @@ const RecruiterDashboard=()=>{
                 <div className="flex max-h-[120px] min-w-3xs justify-between items-center border border shadow-sm rounded-xl h-40 px-4 md:min-w-[220px]">
                     <div className="flex flex-col  ">
                         <div className="text-xs">Total Job Posted</div>
-                        <div className="text-2xl font-bold">{recruiterjobs?recruiterjobs.length:0}</div>
+                        <div className="text-2xl font-bold">{fetchedjobs?fetchedjobs.length:0}</div>
                     </div>
                     <div className="text-3xl bg-[#DBEAFE] p-2 rounded-md"><IoMdCheckboxOutline /></div>
                 </div>
@@ -73,7 +87,7 @@ const RecruiterDashboard=()=>{
                 <div className="flex max-h-[120px]  min-w-3xs justify-between items-center border border shadow-sm rounded-xl h-40 px-4 md:min-w-[220px]">
                     <div className="flex flex-col  ">
                         <div className="text-xs">Active Postings</div>
-                        <div className="text-2xl font-bold">{recruiterjobs?recruiterjobs.filter(job => job.isOpen === true).length:<div>0</div>}</div>
+                        <div className="text-2xl font-bold">{fetchedjobs?fetchedjobs.filter(job => job.isOpen === true).length:<div>0</div>}</div>
                     </div>
                     <div className="text-3xl bg-[#FFE2E2] p-2 rounded-md text-[#C10007]"><IoIosHeartEmpty /></div>
                 </div>
@@ -104,6 +118,6 @@ const RecruiterDashboard=()=>{
             </div>
 
         </div>
-    </div>)
+    </div>):(<div>hello how are you</div>)
 }
 export default RecruiterDashboard;

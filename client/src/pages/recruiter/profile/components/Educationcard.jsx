@@ -1,6 +1,6 @@
 import { MdDelete } from "react-icons/md";
 
-const Educationcard=({description,editactive})=>{
+const Educationcard=({description,editactive,setdescription})=>{
     if (!description) {
         return
     }
@@ -8,7 +8,7 @@ const Educationcard=({description,editactive})=>{
     {editactive?
         <div className="flex flex-col  items-start p-3 border-1 border-[#E2E5E8] rounded-lg gap-2">
              
-              <textarea name="" id="" className="w-full border-none outline-none " value={description} rows={4} >enter comapny description</textarea>
+              <textarea onChange={(e)=>{setdescription(e.target.value);}} name="" id="" className="w-full border-none outline-none " value={description} rows={4} >enter comapny description</textarea>
               
         </div>:
              <div className="flex flex-col p-3 border-1 border-[#E2E5E8] rounded-lg ">
